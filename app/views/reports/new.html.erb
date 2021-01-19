@@ -1,0 +1,26 @@
+<%= form_with(model: Report.new) do |form| %>
+  <div class="report_title">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="report_content">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+  <div class="report_time">
+    <%= form.label :time %>
+    <%= form.time_select :time, class: 'form-control' %>
+  </div>
+  <div class="report_date">
+    <%= form.label :date %>
+    <%= form.date_select :date, class: 'form-control' %>
+  </div>
+  <div class="report_place">
+    <%= form.label :place %>
+    <%= form.text_field :place, class: 'form-control' %>
+  </div>
+  <div class="report_image">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
+<% end %>

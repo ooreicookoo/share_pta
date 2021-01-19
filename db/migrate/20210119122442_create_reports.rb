@@ -7,6 +7,7 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.date :date, null: false
       t.string :place
       t.text :image
+      t.bigint "report_id"
     end
   end
 end

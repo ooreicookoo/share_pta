@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_19_122442) do
     t.date "date", null: false
     t.string "place"
     t.text "image"
+    t.bigint "report_id"
   end
 
 end
