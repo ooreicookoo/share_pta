@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+development:
+  <<: *default
+  database: share_pta_development
+test:
+  <<: *default
+  database: share_pta_test
+production:
+  <<: *default
+  database: share_pta_production
+  username: share_pta
+  password: <%= ENV['SHARE_PTA_DATABASE_PASSWORD'] %>
