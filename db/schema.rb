@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_01_19_122442) do
   create_table "reports", force: :cascade do |t|
     t.string "title", null: false
     t.text "content"
-    t.integer "time", null: false
+    t.float "time", null: false
     t.date "date", null: false
     t.string "place"
     t.text "image"
