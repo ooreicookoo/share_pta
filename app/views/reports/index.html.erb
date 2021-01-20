@@ -17,6 +17,7 @@
     <td><%= report.time %></td>
     <td><%= report.image %></td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
+    <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
   </tr>
 <% end %>
 <%= link_to '新しくブログを投稿する', new_report_path %>

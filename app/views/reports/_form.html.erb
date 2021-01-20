@@ -1,0 +1,43 @@
+<%= form_with(model: @report, local: true) do |form| %>
+  <% if @report.errors.any? %>
+    <div id="errors_explanation">
+      <h2><%= @report.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="report_title">
+    <%= form.label :タイトル %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="report_content">
+    <%= form.label :内容 %>
+    <%= form.text_field :content %>
+  </div>
+  <div class="report_date">
+    <%= form.label :実施日 %>
+    <%= form.date_select :date, class: 'form-control' %>
+  </div>
+  <div class="report_place">
+    <%= form.label :作業場所 %>
+    <%= form.text_field :place, class: 'form-control' %>
+  </div>
+  <div class="report_time">
+    <%= form.label :所要時間 %>
+    <%= form.select :time, [ ["30分", "0.5"], ["1時間", "1"], ["1.5時間", "1.5"],
+    ["2時間", "2"],["2.5時間", "2.5"], ["3時間", "3"], ["3.5時間", "3.5"],["4時間", "4"],
+    ["4.5時間", "4.5"],["5時間", "5"], ["5.5時間", "5.5"],["6時間", "6"],["6.5時間", "6.5"],
+    ["7時間", "7"], ["7.5時間", "7.5"],["8時間", "8"], ["8.5時間", "8.5"], ["9時間", "9"],
+    ["9.5時間", "9.5"], ["10時間", "10"],["10.5時間", "10.5"], ["11時間", "11"], ["11.5時間", "11.5"],
+    ["12時間", "12"], ["12.5時間", "12.5"], ["13時間", "13"], ["13.5時間", "13.5"], ["14時間", "14"]],
+    include_blank: "選択して下さい" , class: 'form-control' %>
+  </div>
+  <div class="report_image">
+    <%= form.label :画像 %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
+  <%= form.submit %>
+<% end %>
