@@ -1,2 +1,23 @@
-<h1>Reports#index</h1>
-<p>Find me in app/views/reports/index.html.erb</p>
+<h1>レポート一覧</h1>
+<table>
+  <tr>
+    <th>レポートタイトル</th>
+    <th>レポート内容</th>
+    <th>実行日</th>
+    <th>作業場所</th>
+    <th>所要時間</th>
+    <th>画像</th>
+  </tr>
+<% @reports.each do |report| %>
+  <tr>
+    <td><%= report.title %></td>
+    <td><%= report.content %></td>
+    <td><%= report.date %></td>
+    <td><%= report.place %></td>
+    <td><%= report.time %></td>
+    <td><%= report.image %></td>
+    <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
+  </tr>
+<% end %>
+<%= link_to '新しくブログを投稿する', new_report_path %>
+</table>
