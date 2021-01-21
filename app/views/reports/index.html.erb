@@ -1,4 +1,5 @@
 <h1>レポート一覧</h1>
+<p><%= notice %></p>
 <table>
   <tr>
     <th>レポートタイトル</th>
@@ -18,8 +19,8 @@
     <td><%= report.image %></td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
     <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
-    <td><%= link_to "ブログを削除する", report_path(report.id), method: :delete %></td>
+    <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
   </tr>
 <% end %>
-<%= link_to '新しくブログを投稿する', new_report_path %>
+<%= link_to '新しくレポートを投稿する', new_report_path %>
 </table>

@@ -29,6 +29,9 @@ class ReportsController < ApplicationController
     @report.destroy
     redirect_to reports_path, notice:"レポートを削除しました！"
   end
+  def confirm
+    @report = Report.new(report_params)
+  end
   private
   def report_params
     params.require(:report).permit(:title, :content, :time, :date, :place, :image)
