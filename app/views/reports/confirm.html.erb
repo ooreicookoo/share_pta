@@ -22,6 +22,6 @@
     <p>作業場所:<%= @report.place %></p>
     <p>所要時間:<%= @report.time %></p>
     <p>画像:<%= @report.image %></p>
-
   <%= form.submit "登録する" %>
+  <%= form.submit "戻る", name: 'back' %>
 <% end %>

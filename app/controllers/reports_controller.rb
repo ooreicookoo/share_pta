@@ -8,11 +8,15 @@ class ReportsController < ApplicationController
   end
   def create
     @report = Report.new(report_params)
+    if params[:back]
+      render :new
+    else
       if @report.save
         redirect_to reports_path, notice: "レポートを作成しました！"
       else
         render :new
       end
+    end
   end
   def show
   end
@@ -31,6 +35,7 @@ class ReportsController < ApplicationController
   end
   def confirm
     @report = Report.new(report_params)
+    render :new if @report.invalid?
   end
   private
   def report_params
