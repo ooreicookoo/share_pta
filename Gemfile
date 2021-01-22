@@ -71,3 +71,5 @@ gem 'devise'
 gem 'devise-i18n'
 
 gem 'bootstrap', '~>4.0.0'
+
+gem 'rails_12factor', group: :production
