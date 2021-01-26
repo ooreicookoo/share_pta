@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   def index
     @reports = Report.all
   end
@@ -20,6 +20,8 @@ class ReportsController < ApplicationController
     end
   end
   def show
+    @report_comments = @report.report_comments
+    @report_comment = ReportComment.new
   end
   def edit
   end

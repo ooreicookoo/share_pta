@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_080816) do
+ActiveRecord::Schema.define(version: 2021_01_25_085547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "report_comments", force: :cascade do |t|
+    t.string "comment_title", null: false
+    t.text "comment_content"
+    t.bigint "user_id"
+    t.bigint "reports_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reports_id"], name: "index_report_comments_on_reports_id"
+    t.index ["user_id"], name: "index_report_comments_on_user_id"
+  end
 
   create_table "reports", force: :cascade do |t|
     t.string "title", null: false
@@ -31,6 +42,11 @@ ActiveRecord::Schema.define(version: 2021_01_21_080816) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "confirmation_token"
@@ -42,4 +58,6 @@ ActiveRecord::Schema.define(version: 2021_01_21_080816) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "report_comments", "reports", column: "reports_id"
+  add_foreign_key "report_comments", "users"
 end
