@@ -5,3 +5,29 @@
 <p>場所: <%= @report.place %></p>
 <p>所要時間: <%= @report.time %>時間</p>
 <p>画像: <%= @report.image %></p>
+
+<h1>コメント</h1>
+<% @report.comments.each do |comment| %>
+  <p>
+    <%= comment.commenter %>: <%= comment.body %>
+    <%= link_to '削除', [comment.report, comment],
+               :confirm => 'よろしいですか？',
+               :method => :delete %>
+
+  </p>
+<% end %>
+
+<h2>コメントを書く</h2>
+<%= form_for([@report, @report.report_comments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :report_comment %><br />
+    <%= f.text_field :report_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

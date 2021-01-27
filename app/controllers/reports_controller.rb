@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_user!
   def index
-    @reports = Report.all
+    @reports = Report.all  # allのあとにつける？.order(created_at: 'desc')
   end
   def new
     @report = Report.new
