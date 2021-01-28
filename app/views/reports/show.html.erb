@@ -4,7 +4,7 @@
 <p>実施日: <%= @report.date %></p>
 <p>場所: <%= @report.place %></p>
 <p>所要時間: <%= @report.time %>時間</p>
-<p>画像: <%= @report.image.url %></p>
+<p>画像: <%= image_tag(@report.image.to_s) %></p>
 
 <%= link_to 'Edit', edit_report_path(@report) %> |
 <%= link_to 'Back', reports_path %>

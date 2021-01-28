@@ -9,6 +9,7 @@ ja:
         title: タイトル
         content: 内容
         time: 所要時間
+        image: 画像
       user:
         title: タイトル
         name: 名前
