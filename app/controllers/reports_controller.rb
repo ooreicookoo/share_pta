@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
   end
   private
   def report_params
-    params.require(:report).permit(:title, :content, :time, :date, :place, :image)
+    params.require(:report).permit(:title, :content, :time, :date, :place, :image, :image_cache)
   end
   def set_report
     @report = Report.find(params[:id])

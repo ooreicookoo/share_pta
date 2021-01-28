@@ -30,8 +30,10 @@
     <%= form.number_field :time, step: '0.5' , class: 'form-control' %>時間
   </div>
   <div class="report_image">
-    <%= form.label :画像 %>
+    <%= form.label :image %>
     <%= form.file_field :image, class: 'form-control' %>
   </div>
-  <%= form.submit %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>

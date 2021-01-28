@@ -3,6 +3,7 @@ ja:
     models:
       report: レポート
       user: ユーザー
+      report_comment: レポートコメント
     attributes:
       report:
         title: タイトル

@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -75,3 +75,7 @@ gem 'devise-i18n'
 gem 'bootstrap', '~>4.0.0'
 
 gem 'rails_12factor', group: :production
+
+gem 'rails_admin', '~> 2.0'
+
+gem 'cancancan'

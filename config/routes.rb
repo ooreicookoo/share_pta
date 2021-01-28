@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'users/index'
   # get 'users/show'
   devise_for :users
@@ -9,10 +10,11 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
-  resources :report_comments
   root 'reports#index'
+  
+  resources :report_comments
 
-  # if Rails.env.development?
-  #   mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  # end
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
