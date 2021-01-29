@@ -31,7 +31,9 @@
   </div>
   <div class="report_image">
     <%= form.label :image %>
-    <%= form.file_field :image, id: :reports_image_path, class: 'form-control' %>
+    <%= image_tag(@report.image.url) if @report.image && @report.image.url %>
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
   </div>
   <div class="actions">
     <%= form.submit %>

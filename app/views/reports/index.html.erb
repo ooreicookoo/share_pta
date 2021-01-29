@@ -12,7 +12,6 @@
     <th>実行日</th>
     <th>作業場所</th>
     <th>所要時間</th>
-    <th>画像</th>
   </tr>
 <% @reports.each do |report| %>
   <tr>
@@ -21,7 +20,6 @@
     <td><%= report.date %></td>
     <td><%= report.place %></td>
     <td><%= report.time %>時間</td>
-    <td><%= report.image %></td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
     <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
     <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>

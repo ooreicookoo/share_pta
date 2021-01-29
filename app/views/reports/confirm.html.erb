@@ -1,5 +1,5 @@
 <h3>以下の内容で、送信する。</h3>
-<%= form_with(model: @report, local: true ) do |form| %>
+<%= form_with(model: @report, url: reports_path, local: true ) do |form| %>
   <% if @report.errors.any? %>
     <div id="errors_explanation">
       <h2><%= @report.errors.count %>件のエラーがあります。</h2>
@@ -15,13 +15,13 @@
     <%= form.hidden_field :date, class: 'form-control' %>
     <%= form.hidden_field :place, class: 'form-control' %>
     <%= form.hidden_field :time, step: '0.5' , class: 'form-control' %>
-    <%= form.hidden_field :image, class: 'form-control' %>
+    <%= form.hidden_field :image_cache, class: 'form-control' %>
     <p>タイトル:<%= @report.title %></p>
     <p>内容:<%= @report.content %></p>
     <p>実施日:<%= @report.date %></p>
     <p>作業場所:<%= @report.place %></p>
-    <p>所要時間:<%= @report.time %></p>
-    <p>画像:<%= @report.image %></p>
+    <p>所要時間:<%= @report.time %></p><br>
+    <p>画像:<%= image_tag(@report.image.url) if @report.image? && @report.image.url %></p>
   <%= form.submit "登録する" %>
   <%= form.submit "戻る", name: 'back' %>
 <% end %>
