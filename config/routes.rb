@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   root 'reports#index'
-  
+
   resources :report_comments
 
   if Rails.env.development?

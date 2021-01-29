@@ -7,17 +7,15 @@
 <p><%= notice %></p>
 <table>
   <tr>
-    <th>レポートタイトル</th>
-    <th>レポート内容</th>
     <th>実行日</th>
+    <th>レポートタイトル</th>
     <th>作業場所</th>
     <th>所要時間</th>
   </tr>
 <% @reports.each do |report| %>
   <tr>
-    <td><%= report.title %></td>
-    <td><%= report.content %></td>
     <td><%= report.date %></td>
+    <td><%= report.title %></td>
     <td><%= report.place %></td>
     <td><%= report.time %>時間</td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
