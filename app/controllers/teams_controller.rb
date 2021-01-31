@@ -32,6 +32,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  def destroy
+    @team.destroy
+    redirect_to teams_path, notice:"チームを削除しました！"
+  end
+
   def invite
     #サービスを利用していない人をに招待する機能
   end

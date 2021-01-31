@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_053723) do
+ActiveRecord::Schema.define(version: 2021_01_31_094604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_053723) do
     t.text "image"
     t.bigint "report_id"
     t.integer "user_id"
+    t.string "team_id"
   end
 
   create_table "teams", force: :cascade do |t|
