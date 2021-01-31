@@ -1,2 +1,21 @@
-<h1>Teams#index</h1>
-<p>Find me in app/views/teams/index.html.erb</p>
+<% if current_user.try(:admin?) %>
+  <h1>Teams_admin</h1>
+<% else %>
+  <h1>Teams</h1>
+<% end %>
+<h1>チーム一覧</h1>
+<p><%= notice %></p>
+<table>
+  <tr>
+    <th>名前</th>
+  </tr>
+<% @teams.each do |team| %>
+  <tr>
+    <td><%= team.name %></td>
+    <td><%= link_to '詳細を確認する', team_path(team.id) %></td>
+    <td><%= link_to "チームを編集する", edit_team_path(team.id) %></td>
+    <td><%= link_to "チームを削除する", team_path(team.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
+  </tr>
+<% end %>
+<%= link_to '新しくチームを作成する', new_team_path %>
+</table>

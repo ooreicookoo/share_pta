@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'reports#index'
   get 'teams/index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'users/index'
@@ -11,8 +12,8 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
-  root 'reports#index'
 
+  resources :assigns, only: %w(create destroy)
   resources :report_comments
 
   resources :teams
