@@ -2,12 +2,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   def index
-    @reports = Report.all  # allのあとにつける？.order(created_at: 'desc')
-    if user_signed_in?
-      @user = User.find(current_user.id)
-    else
-      redirect_to new_user_registration_path
-    end
+    @reports = current_user.reports # allのあとにつける？.order(created_at: 'desc')
   end
 
   def new
@@ -15,7 +10,7 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.build(report_params)
+    @report = current_user.reports.new(report_params)
     if @report.save
       redirect_to reports_path, notice: "レポートを作成しました！"
     else
