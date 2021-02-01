@@ -1,6 +1,6 @@
 <h1>ユーザー一覧</h1>
 <% @users.each do |user| %>
-  <a href="/users/<%= user.id %>"><%= user.email %></a>
+   <p><span>email: </span><%=link_to user.email, user_path(user.id) %></p>
   <hr>
 <% end %>
 <%= link_to "ホームへ戻る", reports_path %>
