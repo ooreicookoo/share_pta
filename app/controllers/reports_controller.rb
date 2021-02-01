@@ -1,8 +1,12 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+
   def index
-    @reports = current_user.reports # allのあとにつける？.order(created_at: 'desc')
+    @reports = Report.all # allのあとにつける？.order(created_at: 'desc')
+    user_signed_in?
+      @user = User.find(current_user.id)
+      @user = User.new
   end
 
   def new
@@ -10,12 +14,13 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = current_user.reports.new(report_params)
-    if @report.save
-      redirect_to reports_path, notice: "レポートを作成しました！"
-    else
-      flash.now[:denger] = '投稿に失敗しました。内容が未記入です'
-      render :new
+    @report = current_user.reports.build(report_params)
+      if params[:back]
+        render :new
+      else
+      if @report.save
+        redirect_to reports_path, notice: "レポートを作成しました！"
+      end
     end
   end
 
@@ -23,8 +28,10 @@ class ReportsController < ApplicationController
     @report_comments = @report.report_comments
     @report_comment = ReportComment.new
   end
+
   def edit
   end
+
   def update
     if @report.update(report_params)
       redirect_to reports_path, notice: "レポートを編集しました！"
@@ -32,17 +39,16 @@ class ReportsController < ApplicationController
       render :edit
     end
   end
+
   def destroy
     @report.destroy
     redirect_to reports_path, notice:"レポートを削除しました！"
   end
   def confirm
     @report = current_user.reports.build(report_params)
-    if @report.invalid?
-      flash.now[:danger] = 'エラー！内容が未記入です'
-      render :new
-    end
+    render :new if @report.invalid?
   end
+
   private
   def report_params
     params.require(:report).permit(:title, :content, :time, :date, :place, :image, :image_cache)

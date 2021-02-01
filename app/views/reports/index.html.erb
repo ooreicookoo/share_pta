@@ -3,6 +3,7 @@
 <% else %>
   <h1>Reports</h1>
 <% end %>
+
 <h1>レポート一覧</h1>
 <table>
   <tr>
@@ -18,9 +19,11 @@
     <td><%= report.place %></td>
     <td><%= report.time %>時間</td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
+<% if report.user.id == current_user.id %>
     <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
     <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
   </tr>
+<% end %>
 <% end %>
 <%= link_to '新しくレポートを投稿する', new_report_path %>
 </table>
