@@ -6,5 +6,5 @@ class Report < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :user
   # belongs_to :team
-  has_many :report_comments
+  has_many :report_comments, dependent: :destroy
 end
