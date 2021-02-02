@@ -4,7 +4,7 @@ class ReportCommentsController < ApplicationController
       @report_comment =  @report.report_comments.build(report_comment_params)
       respond_to do |format|
         if @report_comment.save!
-          format.html { redirect_to report_path(@report), notice: 'コメントを投稿しました'}
+          format.js { render :index }
         else
           format.html { redirect_to report_path(@report), notice: '投稿できませんでした...' }
         end
