@@ -1,4 +1,4 @@
 class ReportComment < ApplicationRecord
-  belongs_to :reports
+  belongs_to :report
   validates :comment_content, presence: true
 end

@@ -1,5 +1,4 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
 <h1>ブログ詳細画面</h1>
 <p>タイトル: <%= @report.title %></p>
 <p>内容: <%= @report.content %></p>
@@ -7,7 +6,8 @@
 <p>場所: <%= @report.place %></p>
 <p>所要時間: <%= @report.time %>時間</p>
 <p>画像:<%= image_tag @report.image.url %></p>
-
+<%= link_to '編集', edit_report_path(@report) %> |
+<%= link_to '戻る', reports_path %>
 <hr>
 
 <div id="report_comments_area">
@@ -17,6 +17,4 @@
   </div>
   <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
   <%= render partial: 'report_comments/form', locals: { report_comment: @report_comment, report: @report } %>
-  <%= link_to '編集', edit_report_path(@report) %> |
-  <%= link_to '戻る', reports_path %>
 </div>
