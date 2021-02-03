@@ -2,7 +2,9 @@
   <% report_comments.each do |report_comment| %>
     <% if report_comment.id.present? %>
       <li>
+        <div class="comment_content" id = "this_comment_<%= report_comment.id %>"></div>
         <p><%= report_comment.comment_content %></p>
+        <p><%= link_to "コメント編集", edit_report_report_comment_path(report, report_comment), remote: true %></p>
       </li>
     <% end %>
   <% end %>
