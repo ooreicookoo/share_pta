@@ -31,6 +31,14 @@ class ReportCommentsController < ApplicationController
         end
       end
   end
+  def destroy
+    @report_comment = ReportComment.find(params[:id])
+    @report_comment.destroy
+    respond_to do |format|
+      flash.now[:notice] = 'コメントが削除されました'
+      format.js { render :index }
+    end
+  end
 
   private
   def report_comment_params
