@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :reports do
-    resources :report_comments
+    resources :report_comments, only: [:create, :destroy, :edit, :update]
     collection do
       post :confirm
     end

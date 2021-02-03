@@ -1,7 +1,9 @@
 class ReportCommentsController < ApplicationController
   before_action :set_report, only: [:create, :edit, :update]
+  before_action :authenticate_user!
   def create
       @report_comment =  @report.report_comments.build(report_comment_params)
+      @report_comment.user_id = current_user.id
       respond_to do |format|
       if @report_comment.save!
         format.js { render :index }
