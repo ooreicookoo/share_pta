@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   PER = 10
 
   def index
-    @reports = Report.page(params[:page]).per(PER) # allのあとにつける？.order(created_at: 'desc')
+    @reports = Report.all.order("id DESC").page(params[:page]).per(PER) 
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
