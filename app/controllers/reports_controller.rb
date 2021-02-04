@@ -1,9 +1,10 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  PER = 10
 
   def index
-    @reports = Report.all # allのあとにつける？.order(created_at: 'desc')
+    @reports = Report.page(params[:page]).per(PER) # allのあとにつける？.order(created_at: 'desc')
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
