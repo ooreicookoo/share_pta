@@ -11,6 +11,7 @@
     <th>レポートタイトル</th>
     <th>作業場所</th>
     <th>所要時間</th>
+    <th>名前</th>
   </tr>
 <% @reports.each do |report| %>
   <tr>
@@ -18,6 +19,7 @@
     <td><%= report.title %></td>
     <td><%= report.place %></td>
     <td><%= report.time %>時間</td>
+    <td><%= report.user.email %></td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
 <% if report.user.id == current_user.id %>
     <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
@@ -27,3 +29,4 @@
 <% end %>
 <%= link_to '新しくレポートを投稿する', new_report_path %>
 </table>
+<%= paginate @reports %>

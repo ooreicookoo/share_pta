@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'teams/index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'users/index'
   # get 'users/show'
@@ -7,13 +6,14 @@ Rails.application.routes.draw do
   resources :users
 
   resources :reports do
+    resources :report_comments, only: [:create, :destroy, :edit, :update]
     collection do
       post :confirm
     end
   end
   root 'reports#index'
 
-  resources :report_comments
+  resources :report_comments, only: [:create]
 
   resources :teams
 

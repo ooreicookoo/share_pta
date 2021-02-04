@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_055158) do
+ActiveRecord::Schema.define(version: 2021_02_02_062345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,12 @@ ActiveRecord::Schema.define(version: 2021_02_01_055158) do
   end
 
   create_table "report_comments", force: :cascade do |t|
-    t.string "comment_title", null: false
     t.text "comment_content"
     t.bigint "user_id"
-    t.bigint "reports_id"
+    t.bigint "report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["reports_id"], name: "index_report_comments_on_reports_id"
+    t.index ["report_id"], name: "index_report_comments_on_report_id"
     t.index ["user_id"], name: "index_report_comments_on_user_id"
   end
 
@@ -81,7 +80,7 @@ ActiveRecord::Schema.define(version: 2021_02_01_055158) do
 
   add_foreign_key "assigns", "teams"
   add_foreign_key "assigns", "users"
-  add_foreign_key "report_comments", "reports", column: "reports_id"
+  add_foreign_key "report_comments", "reports"
   add_foreign_key "report_comments", "users"
   add_foreign_key "reports", "users"
   add_foreign_key "teams", "users", column: "owner_id"

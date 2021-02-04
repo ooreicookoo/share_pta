@@ -1,0 +1,2 @@
+$("#this_comment_<%= @report_comment.id %>").replaceWith("<%= j render 'report_comments/edit', report: @report, report_comment: @report_comment %>");
+$("#notice").html("<%= j flash[:notice] %>");
