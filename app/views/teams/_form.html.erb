@@ -1,0 +1,20 @@
+<%= form_with(model: @team, url: choose_new_or_edit) do |form| %>
+  <% if @team.errors.any? %>
+    <div id="errors_explanation">
+      <h2><%= @team.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="team_name">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
