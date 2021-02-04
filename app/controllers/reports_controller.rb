@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   PER = 10
 
   def index
-    @reports = Report.all.order("id DESC").page(params[:page]).per(PER) 
+    @reports = Report.all.order("id DESC").page(params[:page]).per(PER)
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
@@ -26,6 +26,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @addtime = Report.all.sum(:time)
     @report_comments = @report.report_comments
     @report_comment = @report.report_comments.build
     @report_comments = @report.report_comments.order(created_at: :asc)
