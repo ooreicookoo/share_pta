@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :report_comments, only: [:create]
 
-  resources :teams
+  resources :teams do
+    member do
+     get 'invite'
+   end
+ end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

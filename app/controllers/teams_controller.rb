@@ -25,6 +25,10 @@ class TeamsController < ApplicationController
   def show
   end
 
+  def invite
+    @assign = Assign.new(assign_params)
+  end
+
   def edit
   end
 
@@ -42,11 +46,7 @@ class TeamsController < ApplicationController
   end
 
   def invite
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: '私の素敵なサイトへようこそ')
   end
-    #サービスを利用していない人をに招待する機能
 
 
   private
