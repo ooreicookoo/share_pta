@@ -45,7 +45,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team). permit(:name)
+    params.permit %i[nameowner_id keep_team_id]
   end
   def set_team
     @team = Team.find(params[:id])

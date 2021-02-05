@@ -1,6 +1,8 @@
 <h1>チーム詳細画面</h1>
 <p>チーム名: <%= @team.name %></p>
 
+<% if current_user.id == @team.owner_id %>
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
+<% end %>
 <hr>
