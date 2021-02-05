@@ -1,4 +1,5 @@
 <% if current_user.try(:admin?) %>
+<%= link_to 'チームを作成する', teams_path %>
   <h1>Reports_admin</h1>
 <% else %>
   <h1>Reports</h1>
