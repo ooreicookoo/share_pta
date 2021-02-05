@@ -1,2 +1,7 @@
-<h1>ユーザー詳細ページ</h1>
+<% if current_user.try(:admin?) %>
+  <h1>Reports_admin</h1>
+  <h1>ユーザー詳細ページ</h1>
+<% else %>
+  <h1>ユーザー詳細ページ</h1>
+<% end %>
 <h3><%= @user.email %></h3>
