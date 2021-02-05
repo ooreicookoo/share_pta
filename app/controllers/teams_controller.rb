@@ -8,12 +8,14 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
+
   end
 
   def create
     @team = Team.new(team_params)
-    # @team.owner = current_user
-    if @team.save
+    @team.owner = current_user
+    # binding.pry
+    if @team.save!
       redirect_to  teams_path, notice: 'チームを作成しました！'
     else
       render :new
@@ -45,7 +47,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.permit %i[nameowner_id keep_team_id]
+    params.require(:team).permit(:name, user_ids: [])
   end
   def set_team
     @team = Team.find(params[:id])
