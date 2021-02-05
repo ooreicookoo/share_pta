@@ -42,8 +42,12 @@ class TeamsController < ApplicationController
   end
 
   def invite
-    #サービスを利用していない人をに招待する機能
+    @user = params[:user]
+    @url  = 'http://example.com/login'
+    mail(to: @user.email, subject: '私の素敵なサイトへようこそ')
   end
+    #サービスを利用していない人をに招待する機能
+
 
   private
   def team_params

@@ -1,6 +1,6 @@
 <% if current_user.try(:admin?) %>
-  <h1>Reports_admin</h1>
-  <h1>ユーザー詳細ページ</h1>
+<%= link_to 'チームを作成する', teams_path %>
+  <h1>管理者ユーザー詳細ページ</h1>
 <% else %>
   <h1>ユーザー詳細ページ</h1>
 <% end %>

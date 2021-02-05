@@ -1,9 +1,4 @@
-<% if current_user.try(:admin?) %>
-  <h1>Reports_admin</h1>
-  <%= link_to 'チームを作成する', teams_path %>
-<% else %>
-  <h1>Reports</h1>
-<% end %>
+
 <% @users.each do |user| %>
    <p><span>email: </span><%=link_to user.email, user_path(user.id) %></p>
   <hr>
