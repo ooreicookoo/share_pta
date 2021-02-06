@@ -14,9 +14,8 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @team.owner = current_user
-    # binding.pry
     if @team.save!
-      redirect_to  teams_path, notice: 'チームを作成しました！'
+      redirect_to teams_path, notice: 'チームを作成しました！'
     else
       render :new
     end
@@ -25,8 +24,12 @@ class TeamsController < ApplicationController
   def show
   end
 
+  def invite_mail
+      InviteMailer.invite_mail(@team).deliver
+      redirect_to teams_path, notice:'メンバーに招待メールを送りました'
+  end
+
   def invite
-    @assign = Assign.new(assign_params)
   end
 
   def edit
@@ -43,9 +46,6 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     redirect_to teams_path, notice:"チームを削除しました！"
-  end
-
-  def invite
   end
 
 

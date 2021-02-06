@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
   resources :teams do
     member do
-     get 'invite'
+     get :invite
+     post :invite_mail
    end
  end
 
