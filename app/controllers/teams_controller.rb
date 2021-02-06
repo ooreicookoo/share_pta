@@ -51,8 +51,9 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, user_ids: [])
+    params.require(:team).permit(:name, :id, :owner_id)
   end
+
   def set_team
     @team = Team.find(params[:id])
   end

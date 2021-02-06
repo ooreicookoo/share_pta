@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   root 'reports#index'
 
-  resources :report_comments, only: [:create]
+  resources :assigns, only: [:create]
 
   resources :teams do
     member do
