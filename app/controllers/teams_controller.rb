@@ -25,8 +25,8 @@ class TeamsController < ApplicationController
   end
 
   def invite_mail
-      InviteMailer.invite_mail(@team).deliver
-      redirect_to teams_path, notice:'メンバーに招待メールを送りました'
+    InviteMailer.send_mail(@team).deliver
+      redirect_to team_path, notice: 'チームに招待するメールを送信しました'
   end
 
   def invite
@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
 
   def update
     if @team.update(team_params)
-      redirect_to teams_path, notice: "チーム名を編集しました！"
+      redirect_to team_path, notice: "チーム名を編集しました！"
     else
       render :edit
     end
