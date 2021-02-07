@@ -1,6 +1,7 @@
 <h2>チームを参加しますか</h2>
 <%= form_with(model: [@team, @assign], local: true) do |form| %>
   <div class="actions">
+    <%= form.hidden_field :team_id, value: @team.id %>
     <%= form.submit "チームに参加する" %>
   </div>
 <% end %>
