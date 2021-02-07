@@ -1,21 +1,22 @@
 class AssignsController < ApplicationController
 
-  def index
-  end
-
   def new
     @assign = Assign.new
   end
 
   def create
-    @assign = current_user.reports.build(report_params)
-      if params[:back]
-        render :new
+    @assign = current_user.assigns.build(assign_params)
+    team = find_team(params[:team_id])
+    user = current_user
+      if @assign.save
+        redirect_to team_path(team.id), notice: 'チームに参加しました'
       else
-      if @report.save
-        redirect_to reports_path, notice: "レポートを作成しました！"
+        render :new
       end
     end
+
+
+  def show
   end
 
   private

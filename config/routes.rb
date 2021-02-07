@@ -16,12 +16,13 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :assigns
-      post :show
       member do
        get :invite
        post :invite_mail
+     end
    end
- end
+
+  resources :assigns
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
