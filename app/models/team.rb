@@ -4,8 +4,4 @@ class Team < ApplicationRecord
   has_many :users, through: :assigns
   has_many :assigns, dependent: :destroy
   has_many :reports, dependent: :destroy
-
-  with_options on: :invite? do
-    validates :email,  presence: true
-  end
 end
