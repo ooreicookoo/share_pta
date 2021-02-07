@@ -8,18 +8,18 @@ Rails.application.routes.draw do
 
   resources :reports do
     resources :report_comments, only: [:create, :destroy, :edit, :update]
-    collection do
+      collection do
       post :confirm
     end
   end
   root 'reports#index'
 
-  resources :assigns, only: [:create]
-
   resources :teams do
-    member do
-     get :invite
-     post :invite_mail
+    resources :assigns
+      post :show
+      member do
+       get :invite
+       post :invite_mail
    end
  end
 

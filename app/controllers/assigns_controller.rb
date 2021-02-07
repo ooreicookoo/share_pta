@@ -1,13 +1,23 @@
 class AssignsController < ApplicationController
-  def create
-    team = find_team(params[:team_id])
-    user = email_reliable?(assign_params) ? User.find_or_create_by_email(assign_params) : nil
-    if user
-      team.invite_member(user)
-      redirect_to team_url(team), notice: I18n.t('views.messages.assigned')
-    else
-      redirect_to team_url(team), notice: I18n.t('views.messages.failed_to_assign')
-    end
+
+  def index
   end
+
+  def new
+    @assign = Assign.new
+  end
+
+  def create
+    @assign = current_user.reports.build(report_params)
+      if params[:back]
+        render :new
+      else
+      if @report.save
+        redirect_to reports_path, notice: "レポートを作成しました！"
+      end
+    end
+
+  end
+
 
 end
