@@ -21,9 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def show
-    user_signed_in?
-    @user = User.all  #.order(updated_at: :desc)
-    @user = User.find(current_user.id)
+    @members = @team.members
   end
 
   def invite_mail

@@ -2,9 +2,11 @@
 <p>チーム名: <%= @team.name %></p>
 
 <h2>参加者名</h2>
-
-<%= @user.email %>
-
+<% @members.each do |member| %>
+<tr>
+  <td><%= member.email %></td><br>
+</tr>
+<% end %>
 
 <div class="">
   <% if current_user.id == @team.owner_id %>
