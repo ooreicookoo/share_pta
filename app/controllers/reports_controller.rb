@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
+
   end
 
   def new

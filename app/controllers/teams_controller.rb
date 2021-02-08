@@ -21,9 +21,9 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
-
+    user_signed_in?
     @user = User.all  #.order(updated_at: :desc)
+    @user = User.find(current_user.id)
   end
 
   def invite_mail
@@ -53,7 +53,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, :id, :owner_id)
+    params.require(:team).permit(:name, :id, :owner_id, :email)
   end
 
   def set_team

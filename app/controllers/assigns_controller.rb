@@ -22,6 +22,6 @@ class AssignsController < ApplicationController
 
   private
   def assign_params
-    params.permit(:id, :team_id, :user_id)
+    params.permit(:id, :team_id, :user_id, :email)
   end
 end
