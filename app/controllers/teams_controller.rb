@@ -21,6 +21,9 @@ class TeamsController < ApplicationController
   end
 
   def show
+    @user = User.find(current_user.id)
+
+    @user = User.all  #.order(updated_at: :desc)
   end
 
   def invite_mail
