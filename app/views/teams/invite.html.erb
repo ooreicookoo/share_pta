@@ -1,12 +1,14 @@
-<%= form_with(model: @team, local: true) do |form| %>
+<%= form_with(model: @team, local: true, url: invite_mail_team_path(id: @team.id), method: "post") do |form| %>
+<p>チームに招待したい人のメールアドレス入力してください</p>
 
   <div class="team_name">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, placeholder: "emailアドレスを入力", required: true  %>
   </div>
 
   <div class="actions">
     <%= form.hidden_field :owner_id, value: current_user.id %>
-    <%= form.submit %>
+    <%= form.submit "招待メールを送信する"%>
   </div>
+
 <% end %>

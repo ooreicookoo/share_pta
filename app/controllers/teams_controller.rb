@@ -1,32 +1,35 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail]
 
   def index
-    @teams = Team.all
+    @teams = Team.all.order(updated_at: :desc)
   end
 
   def new
     @team = Team.new
-
   end
 
   def create
     @team = Team.new(team_params)
     @team.owner = current_user
-    # binding.pry
-    if @team.save!
-      redirect_to  teams_path, notice: 'チームを作成しました！'
+    if @team.save
+      redirect_to teams_path, notice: 'チームを作成しました！'
     else
       render :new
     end
   end
 
   def show
+    @members = @team.members
   end
 
   def invite
-    @assign = Assign.new(assign_params)
+  end
+
+  def invite_mail
+    InviteMailer.send_mail(@team, team_params[:email]).deliver
+    redirect_to team_path(id: @team.id), notice: 'チームに招待するメールを送信しました'
   end
 
   def edit
@@ -34,7 +37,7 @@ class TeamsController < ApplicationController
 
   def update
     if @team.update(team_params)
-      redirect_to teams_path, notice: "チーム名を編集しました！"
+      redirect_to team_path, notice: "チーム名を編集しました！"
     else
       render :edit
     end
@@ -45,14 +48,12 @@ class TeamsController < ApplicationController
     redirect_to teams_path, notice:"チームを削除しました！"
   end
 
-  def invite
-  end
-
 
   private
   def team_params
-    params.require(:team).permit(:name, user_ids: [])
+    params.require(:team).permit(:name, :id, :owner_id, :email)
   end
+
   def set_team
     @team = Team.find(params[:id])
   end

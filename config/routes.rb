@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'assigns/create'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # get 'users/index'
   # get 'users/show'
@@ -7,19 +8,21 @@ Rails.application.routes.draw do
 
   resources :reports do
     resources :report_comments, only: [:create, :destroy, :edit, :update]
-    collection do
+      collection do
       post :confirm
     end
   end
   root 'reports#index'
 
-  resources :report_comments, only: [:create]
-
   resources :teams do
+    resources :assigns
     member do
-     get 'invite'
-   end
- end
+       get :invite
+       post :invite_mail
+    end
+  end
+
+  resources :assigns
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

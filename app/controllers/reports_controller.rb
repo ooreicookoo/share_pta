@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
+
   end
 
   def new
@@ -26,7 +27,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @addtime = Report.all.sum(:time)
+    @total_time = current_user.reports.sum(:time)
     @report_comments = @report.report_comments
     @report_comment = @report.report_comments.build
     @report_comments = @report.report_comments.order(created_at: :asc)
