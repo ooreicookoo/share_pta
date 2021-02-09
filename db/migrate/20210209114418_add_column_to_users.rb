@@ -1,4 +1,4 @@
-class AddAdminIdToUsers < ActiveRecord::Migration[5.2]
+class AddColumnToUsers < ActiveRecord::Migration[5.2]
   def change
     add_column :users, :admin_id, :integer
     add_column :users, :leader_id, :integer

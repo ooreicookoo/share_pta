@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :assigns
-      member do
+    member do
        get :invite
        post :invite_mail
-     end
-   end
+    end
+  end
 
   resources :assigns
 

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail]
 
   def index
     @teams = Team.all.order(updated_at: :desc)
@@ -24,12 +24,12 @@ class TeamsController < ApplicationController
     @members = @team.members
   end
 
-  def invite_mail
-    InviteMailer.send_mail(@team).deliver
-      redirect_to team_path, notice: 'チームに招待するメールを送信しました'
+  def invite
   end
 
-  def invite
+  def invite_mail
+    InviteMailer.send_mail(@team, team_params[:email]).deliver
+    redirect_to team_path(id: @team.id), notice: 'チームに招待するメールを送信しました'
   end
 
   def edit
