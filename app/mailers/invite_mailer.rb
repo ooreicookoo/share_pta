@@ -1,11 +1,6 @@
 class InviteMailer < ApplicationMailer
   def send_mail(team)
-    @team = team.id
-    mail(
-      subject: "PTAアプリ・チームへの招待メール",
-      to: @team
-    ) do |format|
-      format.text
-    end
+    @team = team
+    mail to: "user.email", subject: "PTAアプリ・シェアータスクのチーム参加への招待です"
   end
 end

@@ -1,12 +1,14 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @team.name %>へようこそ。</h1>
+    <h1>■ PTAアプリ・シェアータスクのチーム参加への招待です。</h1>
 
-      このサイトにログインするには、<%= @url %>をクリックしてください。
-
-    <p>ご入会ありがとうございます。どうぞお楽しみくださいませ。</p>
+      <p>このチームに参加するには、<br>
+      <%# <%= link_to 'チームメンバーになる', new_team_"#{team_id}"_assign_url %>をクリックし、<br> %>
+      チームに参加してください。<br>
+      宜しくお願い致します。</p>
   </body>
 </html>
