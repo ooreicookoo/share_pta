@@ -1,3 +1,7 @@
 <h3><%= @user.email %></h3>
+<h3><%= @user.name %></h3>
+<h4><%= @user.school_year %>年
+    <%= @user.school_class %>組</h4>
+<h4>担当：<%= @user.charge %></h4>
 
-<p>下記URLより必ずマイページ情報を入力してください。</p>
+<%= link_to 'マイページを編集', edit_user_path(@user) %> 

@@ -1,0 +1,37 @@
+<%= form_with(model: @user, local: true ) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @user.errors.count %>error(s) occured.</h2>
+      <ul>
+
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :school_year %><br />
+    <%= form.number_field :school_year, min: '1',  max: '6', placeholder: "例：１", required: true, class: "form-control" %>年
+  </div>
+
+  <div class="field">
+    <%= form.label :school_class %><br />
+    <%= form.number_field :school_class, min: '1',  max: '41', placeholder: "例：３", required: true, class: "form-control" %>組
+  </div>
+
+  <div class="field">
+    <%= form.label :charge %><br />
+    <%= form.text_field :charge, required: true, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit "更新する"%>
+  </div>
+<% end %>

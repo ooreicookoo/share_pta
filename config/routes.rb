@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get 'users/index'
   # get 'users/show'
   devise_for :users
-  resources :users
+  resources :users, only: [:create, :show, :edit, :update]
 
   resources :reports do
     resources :report_comments, only: [:create, :destroy, :edit, :update]
