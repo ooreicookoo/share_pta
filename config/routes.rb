@@ -6,12 +6,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:create, :show, :edit, :update]
 
-  resources :reports do
-    resources :report_comments, only: [:create, :destroy, :edit, :update]
-      collection do
-      post :confirm
-    end
-  end
   root 'reports#index'
 
   resources :teams do
@@ -19,6 +13,12 @@ Rails.application.routes.draw do
     member do
        get :invite
        post :invite_mail
+    end
+    resources :reports do
+      resources :report_comments, only: [:create, :destroy, :edit, :update]
+        collection do
+        post :confirm
+      end
     end
   end
 

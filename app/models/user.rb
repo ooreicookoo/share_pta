@@ -10,6 +10,14 @@ class User < ApplicationRecord
   has_many :assigns, dependent: :destroy
   has_many :teams, foreign_key: :owner_id
   has_many :teams, through: :assigns
-
   has_many :report_comments, dependent: :destroy
+
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :email, presence: true, uniqueness: true
+  before_validation { email.downcase! }
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :school_year, presence: true
+  validates :school_class, presence: true
+
 end
