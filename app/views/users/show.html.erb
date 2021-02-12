@@ -1,15 +1,12 @@
 <div class="container_position">
   <div class="container">
     <div class="contents">
+      <h3 class="tilte">マイページ</h3><br>
       <h4><%= @user.school_year %>年<%= @user.school_class %>組</h4>
-      <h2><%= @user.name %></h2>
+      <h3><%= @user.name %></h3>
       <h4><%= @user.email %></h4><br>
-
-
       <h4>担当：<%= @user.charge %></h4>
-
-      <%# <%= link_to 'マイページを編集', edit_user_path(@user), %> %>
-
     </div>
+      <%= link_to 'マイページを編集', edit_user_path(@user) %>
   </div>
 </div>
