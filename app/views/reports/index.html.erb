@@ -18,11 +18,11 @@
     <td><%= report.user.email %></td>
     <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
 <% if report.user.id == current_user.id %>
-    <td><%= link_to "レポートを編集する", edit_report_path(report.id) %></td>
+    <td><%= link_to "レポートを編集する", edit_team_report_path(report.id) %></td>
     <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
   </tr>
 <% end %>
 <% end %>
-<%= link_to '新しくレポートを投稿する', new_report_path %>
+  <%# <%= link_to 'レポートを新規作成', new_team_report_path(@team, @report) %> %>
 </table>
 <%= paginate @reports %>

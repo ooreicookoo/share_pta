@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail]
 
   def index
-    @teams = Team.all.order(updated_at: :desc)
+    @teams = current_user.teams.all.order(updated_at: :desc)
   end
 
   def new
@@ -28,6 +28,7 @@ class TeamsController < ApplicationController
   end
 
   def invite_mail
+    # binding.irb
     InviteMailer.send_mail(@team, team_params[:email]).deliver
     redirect_to team_path(id: @team.id), notice: 'チームに招待するメールを送信しました'
   end

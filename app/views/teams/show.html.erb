@@ -1,17 +1,21 @@
 <h1>チーム詳細画面</h1>
-<p>チーム名: <%= @team.name %></p>
-
+  <p>チーム名: <%= @team.name %></p>
 <h2>参加者名</h2>
-<% @members.each do |member| %>
-<tr>
-  <td><%= member.email %></td><br>
-</tr>
-<% end %>
+  <% @members.each do |member| %>
+    <tr>
+      <td><%= member.email %></td><br>
+    </tr>
+  <% end %>
 
 <div class="">
-  <% if current_user.id == @team.owner_id %>
-  </div>
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
-<%= link_to 'メンバーを招待する', invite_team_path(@team.id) %>
-<% end %>
+  <% if user_signed_in? %>
+    <% if current_user.leader? %>
+      <% if current_user.admin? %>
+        <%= link_to 'Edit', edit_team_path(@team) %> |
+        <%= link_to 'Back', teams_path %>
+        <%= link_to 'メンバーを招待する', invite_team_path(@team.id) %>
+      <% end %>
+    <% end %>
+  <% end %>
+ <%= link_to 'レポートを新規作成', new_team_report_path(@team) %>
+</div>

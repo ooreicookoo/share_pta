@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:create, :show, :edit, :update]
 
-  root 'reports#index'
+  root 'users#show'
 
   resources :teams do
     resources :assigns
