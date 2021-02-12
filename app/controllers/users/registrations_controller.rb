@@ -60,6 +60,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
     if current_user.leader?
       new_team_path(resource)
+    else
+      team_path(resource)
     end
   end
 end

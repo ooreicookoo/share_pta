@@ -1,28 +1,29 @@
-  <h1>Reports</h1>
-
-<h1>レポート一覧</h1>
-<table>
-  <tr>
-    <th>実行日</th>
-    <th>レポートタイトル</th>
-    <th>作業場所</th>
-    <th>所要時間</th>
-    <th>名前</th>
-  </tr>
-<% @reports.each do |report| %>
-  <tr>
-    <td><%= report.date %></td>
-    <td><%= report.title %></td>
-    <td><%= report.place %></td>
-    <td><%= report.time %>時間</td>
-    <td><%= report.user.email %></td>
-    <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
-<% if report.user.id == current_user.id %>
-    <td><%= link_to "レポートを編集する", edit_team_report_path(report.id) %></td>
-    <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
-  </tr>
-<% end %>
-<% end %>
-  <%# <%= link_to 'レポートを新規作成', new_team_report_path(@team, @report) %> %>
-</table>
-<%= paginate @reports %>
+<div class="container">
+  <h1 class="title">レポート一覧</h1>
+  　　<nav class="menu">
+        <table>
+          <tr>
+            <th>実行日</th>
+            <th>レポートタイトル</th>
+            <th>作業場所</th>
+            <th>所要時間</th>
+            <th>名前</th>
+          </tr>
+        <% @reports.each do |report| %>
+          <tr>
+            <td><%= report.date %></td>
+            <td><%= report.title %></td>
+            <td><%= report.place %></td>
+            <td><%= report.time %>時間</td>
+            <td><%= report.user.email %></td>
+            <td><%= link_to '詳細を確認する', report_path(report.id) %></td>
+        <% if report.user.id == current_user.id %>
+            <td><%= link_to "レポートを編集する", edit_team_report_path(report.id) %></td>
+            <td><%= link_to "レポートを削除する", report_path(report.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
+          </tr>
+        <% end %>
+        <% end %>
+          <%# <%= link_to 'レポートを新規作成', new_team_report_path(@team, @report) %> %>
+        </table>
+  <%= paginate @reports %>
+</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SharePta</title>
+    <title>Share_Work_PTA</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,33 +10,42 @@
   </head>
 
   <body>
-
-      <% if user_signed_in? %>
-        <% if current_user.leader? %>
-          <%# <%= link_to "レポート一覧", team_reports_path(team.id) %> %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <%= link_to "マイページ", user_path(current_user.id) %>
-          <%= link_to 'チームを作成する', teams_path %>
-        <% end %>
-         <%# <% binding.irb %> %>
-        <%= link_to "チーム一覧", teams_path %>
-
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <%= link_to "マイページ", user_path(current_user.id) %>
-      <% else %>
-        <%= link_to "新規登録", new_user_registration_path %>
-        <%= link_to "ログイン", new_user_session_path %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnavi">
+            <span class="sr-only">Share_Work_PTA</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <a class="navbar-brand" href="#">Share_Work_PTA</a>
+        </div>
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+              <% if current_user.leader? %>
+                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+                <li><%= link_to 'チームを作成する', teams_path %></li>
+              <% else %>
+                <li><%= link_to "チーム一覧", teams_path %></li>
+                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+              <% else %>
+                <li><%= link_to "新規登録", new_user_registration_path %></li>
+                <li><%= link_to "ログイン", new_user_session_path %></li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      <% if notice %>
+        <p class="alert alert-notice"><%= notice %></p>
       <% end %>
-
-
-
-
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
+      <% if alert %>
+        <p class="alert alert-error"><%= alert %></p>
+      <% end %>
     <%= yield %>
   </body>
 </html>

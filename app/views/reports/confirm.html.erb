@@ -1,5 +1,5 @@
 <h3>以下の内容で、送信する。</h3>
-<%= form_with(model: @report, url: reports_path, local: true ) do |form| %>
+<%= form_with(model:[ @team, @report], url: confirm_team_reports_path, local: true ) do |form| %>
   <% if @report.errors.any? %>
     <div id="errors_explanation">
       <h2><%= @report.errors.count %>件のエラーがあります。</h2>
@@ -9,7 +9,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+<% end %>
     <%= form.hidden_field :title %>
     <%= form.hidden_field :content %>
     <%= form.hidden_field :date, class: 'form-control' %>
