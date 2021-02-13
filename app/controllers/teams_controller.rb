@@ -3,7 +3,8 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail]
 
   def index
-    @teams = current_user.teams.all.order(updated_at: :desc)
+    @teams = Team.all.order(updated_at: :desc)
+
   end
 
   def new

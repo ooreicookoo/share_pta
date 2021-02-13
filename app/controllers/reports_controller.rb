@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_team, only: [:edit, :update, :destroy, :create]
+  before_action :set_team, only: [:edit, :update, :create]
   before_action :set_report, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   PER = 10
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to reports_path, notice: "レポートを編集しました！"
+      redirect_to report_path, notice: "レポートを編集しました！"
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    redirect_to reports_path, notice:"レポートを削除しました！"
+    redirect_to reports_path(report.id), notice:"レポートを削除しました！"
   end
   def confirm
   # binding.irb
@@ -67,7 +67,8 @@ class ReportsController < ApplicationController
   end
 
   def set_team
-    @team = Team.find(params[:team_id])
+    binding.irb
+    @team = Team.find(params[:id])
   end
 
   def set_report

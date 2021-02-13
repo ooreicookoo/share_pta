@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:create, :show, :edit, :update]
 
-  root 'users#show'
+  root 'top#index'
 
   resources :teams, shallow: true do
     resources :assigns

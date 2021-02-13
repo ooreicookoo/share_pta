@@ -10,15 +10,12 @@
         </tr>
        <% end %>
         <div class="">
-          <% if user_signed_in? %>
             <% if current_user.leader? %>
-              <% if current_user.admin? %>
                 <%= link_to 'チーム名を変更する', edit_team_path(@team) %> |
                 <%= link_to '戻る', teams_path %><br><br>
                 <%= link_to 'メンバーを招待する', invite_team_path(@team.id), class: 'btn btn-default' %>
+                <%= link_to 'レポート一覧', team_reports_path(@team), class: 'btn btn-default' %>
               <% end %>
-            <% end %>
-          <% end %>
         <%= link_to 'レポートを新規作成', new_team_report_path(@team), class: 'btn btn-default' %>
       </div>
     </div>
