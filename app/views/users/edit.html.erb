@@ -13,24 +13,24 @@
   <div class="field">
     <%= form.label :name %><br>
     <%= form.text_field :name, placeholder: "例：鈴木　花子", required: true, class: "form-control" %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= form.label :school_year %><br>
     <%= form.number_field :school_year, min: '1',  max: '6', placeholder: "例：１", class: "form-control_parts" %>年
-  </div>
+  </div><br>
 
   <div class="field">
     <%= form.label :school_class %><br>
     <%= form.number_field :school_class, min: '1',  max: '41', placeholder: "例：３", required: true, class: "form-control_parts" %>組
-  </div>
+  </div><br>
 
   <div class="field">
     <%= form.label :charge %><br />
-    <%= form.text_field :charge, placeholder: "担当の係を入れてください", class: "form-control" %>
+    <%= form.text_field :charge, placeholder: "役割を記入", class: "form-control" %>
   </div><br>
 
   <div>
-    <%= form.submit "更新する"%>
+    <%= form.submit "更新する", class: 'btn btn-default'%>
   </div>
 <% end %>

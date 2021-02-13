@@ -1,21 +1,26 @@
-<h1>チーム詳細画面</h1>
-  <p>チーム名: <%= @team.name %></p>
-<h2>参加者名</h2>
-  <% @members.each do |member| %>
-    <tr>
-      <td><%= member.email %></td><br>
-    </tr>
-  <% end %>
-
-<div class="">
-  <% if user_signed_in? %>
-    <% if current_user.leader? %>
-      <% if current_user.admin? %>
-        <%= link_to 'Edit', edit_team_path(@team) %> |
-        <%= link_to 'Back', teams_path %>
-        <%= link_to 'メンバーを招待する', invite_team_path(@team.id) %>
-      <% end %>
-    <% end %>
-  <% end %>
- <%= link_to 'レポートを新規作成', new_team_report_path(@team) %>
+<div class="container_position">
+  <div class="container">
+    <div class="contents">
+　　　<h3 class="tilte">チーム詳細画面</h3><br>
+       <h4>■ チーム名: <%= @team.name %></h4><br>
+       <h4>参加者名▼</h4>
+       <% @members.each do |member| %>
+        <tr>
+          <td>・<%= member.name %></td><br>
+        </tr>
+       <% end %>
+        <div class="">
+          <% if user_signed_in? %>
+            <% if current_user.leader? %>
+              <% if current_user.admin? %>
+                <%= link_to 'チーム名を変更する', edit_team_path(@team) %> |
+                <%= link_to '戻る', teams_path %><br><br>
+                <%= link_to 'メンバーを招待する', invite_team_path(@team.id), class: 'btn btn-default' %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <%= link_to 'レポートを新規作成', new_team_report_path(@team), class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
 </div>

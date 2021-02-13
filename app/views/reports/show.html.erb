@@ -12,8 +12,8 @@
   <%# <% end %> %>
 <% if @report.user.id == current_user.id %>
 
-<%= link_to '編集', edit_team_report_path(@team, @report) %> <% end %>
-<%= link_to '戻る', reports_path %>
+<%= link_to '編集', edit_report_path(@report) %> <% end %>
+<%= link_to '戻る', team_reports_path(@report.team) %>
 <hr>
 
 <div id="report_comments_area">

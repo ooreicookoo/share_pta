@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   root 'users#show'
 
-  resources :teams do
+  resources :teams, shallow: true do
     resources :assigns
     member do
        get :invite

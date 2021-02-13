@@ -7,6 +7,6 @@
       <h4><%= @user.email %></h4><br>
       <h4>担当：<%= @user.charge %></h4>
     </div>
-      <%= link_to 'マイページを編集', edit_user_path(@user) %>
+      <%= link_to 'マイページを編集', edit_user_path(@user), class: 'btn btn-default' %>
   </div>
 </div>

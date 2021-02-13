@@ -1,5 +1,8 @@
+<div class="container_position">
+  <div class="container">
+    <div class="contents">
 <h3>以下の内容で、送信する。</h3>
-<%= form_with(model:[ @team, @report], url: confirm_team_reports_path, local: true ) do |form| %>
+<%= form_with(model: @report, url: team_reports_path, local: true ) do |form| %>
   <% if @report.errors.any? %>
     <div id="errors_explanation">
       <h2><%= @report.errors.count %>件のエラーがあります。</h2>
@@ -25,3 +28,6 @@
   <%= form.submit "登録する" %>
   <%= form.submit "戻る", name: 'back' %>
 <% end %>
+    </div>
+  </div>
+</div>
