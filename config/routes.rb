@@ -14,11 +14,18 @@ Rails.application.routes.draw do
        get :invite
        post :invite_mail
     end
+  end
+
+  resources :reports, only: [] do
+    resources :report_comments, only: [:create, :destroy, :edit, :update]
+      collection do
+      post :confirm
+    end
+  end
+
+  resources :teams do
     resources :reports do
-      resources :report_comments, only: [:create, :destroy, :edit, :update]
-        collection do
-        post :confirm
-      end
+      post :confirm, on: :collection # on: :member
     end
   end
 

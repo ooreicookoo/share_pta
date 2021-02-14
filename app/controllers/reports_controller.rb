@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_team, only: [:edit, :update, :create]
+  before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_report, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   PER = 10
@@ -13,13 +13,11 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @team = Team.find(params[:team_id])
     @report = Report.new
   end
 
   def create
     @report = current_user.reports.build(report_params)
-    # binding.irb
     @report.team_id = @team.id
       if params[:back]
         render :new
@@ -43,7 +41,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to report_path, notice: "レポートを編集しました！"
+      redirect_to team_report_path(@team), notice: "レポートを編集しました！"
     else
       render :edit
     end
@@ -51,7 +49,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    redirect_to reports_path(report.id), notice:"レポートを削除しました！"
+    redirect_to team_reports_path(@team.id), notice:"レポートを削除しました！"
   end
   def confirm
   # binding.irb
@@ -67,8 +65,7 @@ class ReportsController < ApplicationController
   end
 
   def set_team
-    binding.irb
-    @team = Team.find(params[:id])
+    @team = Team.find(params[:team_id])
   end
 
   def set_report
@@ -83,3 +80,18 @@ class ReportsController < ApplicationController
     end
   end
 end
+
+
+#     route
+# view -> controller
+#
+# params
+#
+# 1. form -> view
+# 2. URL -> route.rb
+#
+# http://localhost:3000/reports/:id/edit
+# http://localhost:3000/reports/34/edit -> params = { id: 34 }
+#
+# http://localhost:3000/teams/:team_id/reports/:id/edit
+# http://localhost:3000/teams/1/reports/34/edit -> params = { id: 34, team_id: 1 }

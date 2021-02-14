@@ -1,4 +1,4 @@
-<%= form_with(model:@report, local: true, url: choose_new_or_edit ) do |form| %>
+<%= form_with(model: [@team, @report], local: true, url: choose_new_or_edit ) do |form| %>
   <% if @report.errors.any? %>
     <div id="errors_explanation">
       <h2><%= @report.errors.count %>件のエラーがあります。</h2>
@@ -36,7 +36,7 @@
     <%= form.hidden_field :image_cache %>
   </div>
   <div class="actions">
-    <%= form.hidden_field :team_id, value: @team.id %> %>
+    <%= form.hidden_field :team_id, value: @team.id %>
     <%= form.submit %>
   </div>
 <% end %>

@@ -4,7 +4,7 @@
 
 　　　<h3 class="tilte">チーム一覧</h3><br>
           <table>
-            <thead>new_assign_path
+            <thead>
         <tr>
           <th colspan="3"></th>
         </tr>
@@ -13,12 +13,17 @@
       <% @teams.each do |team| %>
         <tr>
           <td>■ <%= team.name %></td>
-          <% current_user.leader? %>
+          <% if current_user.leader? %>
             <td><%= link_to 'Show', team %></td>
             <td><%= link_to 'Edit', edit_team_path(team) %></td>
             <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
+          <% else %>
+            <% if @report.user.id == current_user.id %>
+              <td><%= link_to 'Show', team %></td>
+            <% end %>
+         <% end %>
         </tr>
+      <% end %>
     </tbody>
     </table><br>
     <%= link_to 'New Team', new_team_path, class: 'btn btn-default' %>
