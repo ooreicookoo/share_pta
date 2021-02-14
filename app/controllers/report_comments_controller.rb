@@ -1,6 +1,7 @@
 class ReportCommentsController < ApplicationController
-  before_action :set_report, only: [:create, :edit, :update]
+  before_action :set_report, only: [:create, :edit, :update, :edit, :destroy]
   before_action :authenticate_user!
+
   def create
       @report_comment = @report.report_comments.build(report_comment_params)
       # @report_comment.user_id = current_user.id
@@ -8,7 +9,7 @@ class ReportCommentsController < ApplicationController
       if @report_comment.save!
         format.js { render :index }
       else
-        format.html { redirect_to report_path(@report), notice: '投稿できませんでした...' }
+        format.html { redirect_to team_report_path(@report), notice: '投稿できませんでした...' }
       end
     end
   end

@@ -1,17 +1,16 @@
 <div class="container">
-<h1>レポート詳細画面</h1>
-<p>By:<%= @report.user.email %></p>
-<p>タイトル: <%= @report.title %></p>
-<p>内容: <%= @report.content %></p>
-<p>実施日: <%= @report.date %></p>
-<p>場所: <%= @report.place %></p>
-<p>所要時間: <%= @report.time %>時間</p>
-<p>所要合算: <%= @total_time %>時間</p>
-<p>画像:<%= image_tag(@report.image.url) if @report.image && @report.image.url %></p>
-<% if @report.user.id == current_user.id %>
+  <h1>レポート詳細画面</h1>
+  <p>投稿者:<%= @report.user.name %></p>
+  <p>タイトル: <%= @report.title %></p>
+  <p>内容: <%= @report.content %></p>
+  <p>実施日: <%= @report.date %></p>
+  <p>場所: <%= @report.place %></p>
+  <p>所要時間: <%= @report.time %>時間</p>
+  <p>所要合算: <%= @total_time %>時間</p>
+  <p>画像:<%= image_tag(@report.image.url) if @report.image && @report.image.url %></p>
 
-<%= link_to '編集', edit_report_path(@report) %> <% end %>
-<%= link_to '戻る', reports_path %>
+<% if @report.user.id == current_user.id %>
+<% end %>
 <hr>
 
 <div id="report_comments_area">

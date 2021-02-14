@@ -1,27 +1,30 @@
-<h1>Teams</h1>
+<div class="container_position">
+  <div class="container">
+    <div class="contents">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @teams.each do |team| %>
-      <tr>
-        <td><%= team.name %></td>
-        
-        <% if team.owner_id == current_user.id %>
-          <td><%= link_to 'Show', team %></td>
-          <td><%= link_to 'Edit', edit_team_path(team) %></td>
-          <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Team', new_team_path %>
+　　　<h3 class="tilte">チーム一覧</h3><br>
+          <table>
+            <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td>■ <%= team.name %></td>
+          <% if current_user.leader? %>
+            <td><%= link_to 'Show', team %></td>
+            <td><%= link_to 'Edit', edit_team_path(team) %></td>
+            <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% else %>
+              <td><%= link_to 'Show', team %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+    </table><br>
+    <%= link_to 'New Team', new_team_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+</div>

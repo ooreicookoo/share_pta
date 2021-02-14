@@ -4,21 +4,28 @@ Rails.application.routes.draw do
   # get 'users/index'
   # get 'users/show'
   devise_for :users
-  resources :users
+  resources :users, only: [:create, :show, :edit, :update]
 
-  resources :reports do
+  root 'top#index'
+
+  resources :teams, shallow: true do
+    resources :assigns
+    member do
+       get :invite
+       post :invite_mail
+    end
+  end
+
+  resources :reports, only: [] do
     resources :report_comments, only: [:create, :destroy, :edit, :update]
       collection do
       post :confirm
     end
   end
-  root 'reports#index'
 
   resources :teams do
-    resources :assigns
-    member do
-       get :invite
-       post :invite_mail
+    resources :reports do
+      post :confirm, on: :collection # on: :member
     end
   end
 

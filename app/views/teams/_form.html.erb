@@ -10,9 +10,12 @@
     </div>
   <% end %>
   <div class="team_name">
-    <%= form.label :name %>
+    <%= form.label :チーム名 %>
     <%= form.text_field :name %>
-  </div>
+  </div><br>
+  <p>例：A小学校/役員<br>
+  例：A小学校/広報<br>
+  例：A小学校/学級、など<br></p>
 
   <div class="actions">
     <%= form.hidden_field :owner_id, value: current_user.id %>

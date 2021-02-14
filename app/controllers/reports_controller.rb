@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_report, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   PER = 10
 
@@ -8,7 +9,7 @@ class ReportsController < ApplicationController
     user_signed_in?
       @user = User.find(current_user.id)
       @user = User.new
-
+      @team = Team.find(params[:team_id])
   end
 
   def new
@@ -17,17 +18,19 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.build(report_params)
+    @report.team_id = @team.id
       if params[:back]
         render :new
       else
       if @report.save
-        redirect_to reports_path, notice: "レポートを作成しました！"
+        redirect_to team_reports_path(@report.team.id), notice: "レポートを作成しました！"
       end
     end
   end
 
   def show
-    @total_time = current_user.reports.sum(:time)
+  @report = Report.find(params[:id])
+    @total_time = @report.user.reports.sum(:time)
     @report_comments = @report.report_comments
     @report_comment = @report.report_comments.build
     @report_comments = @report.report_comments.order(created_at: :asc)
@@ -38,7 +41,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to reports_path, notice: "レポートを編集しました！"
+      redirect_to team_report_path(@team), notice: "レポートを編集しました！"
     else
       render :edit
     end
@@ -46,18 +49,23 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    redirect_to reports_path, notice:"レポートを削除しました！"
+    redirect_to team_reports_path(@team.id), notice:"レポートを削除しました！"
   end
   def confirm
+  # binding.irb
     @report = current_user.reports.build(report_params)
-    render :new if @report.invalid?
+    # render :new if @report.invalid?
   end
 
   private
   def report_params
     params.require(:report).permit(:title, :content, :time,
                                    :date, :place, :image,
-                                   :image_cache).merge(user_id: current_user.id)
+                                   :image_cache, :team_id, :user_id)
+  end
+
+  def set_team
+    @team = Team.find(params[:team_id])
   end
 
   def set_report
@@ -72,3 +80,18 @@ class ReportsController < ApplicationController
     end
   end
 end
+
+
+#     route
+# view -> controller
+#
+# params
+#
+# 1. form -> view
+# 2. URL -> route.rb
+#
+# http://localhost:3000/reports/:id/edit
+# http://localhost:3000/reports/34/edit -> params = { id: 34 }
+#
+# http://localhost:3000/teams/:team_id/reports/:id/edit
+# http://localhost:3000/teams/1/reports/34/edit -> params = { id: 34, team_id: 1 }
