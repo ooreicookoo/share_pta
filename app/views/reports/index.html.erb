@@ -16,7 +16,7 @@
             <td><%= report.title %></td>
             <td><%= report.place %></td>
             <td><%= report.time %>時間</td>
-            <td><%= report.user.email %></td>
+            <td><%= report.user.name %></td>
             <td><%= link_to '詳細を確認する', team_report_path(@team, report) %></td>
             <% if report.user.id == current_user.id %>
               <td><%= link_to "レポートを編集する", edit_team_report_path(@team, report) %></td>

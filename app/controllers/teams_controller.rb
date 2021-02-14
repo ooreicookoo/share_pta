@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.all.order(updated_at: :desc)
-
+    # binding.pry
   end
 
   def new
@@ -23,6 +23,7 @@ class TeamsController < ApplicationController
 
   def show
     @members = @team.members
+    @team.owner
   end
 
   def invite

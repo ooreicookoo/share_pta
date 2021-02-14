@@ -61,7 +61,7 @@ class ReportsController < ApplicationController
   def report_params
     params.require(:report).permit(:title, :content, :time,
                                    :date, :place, :image,
-                                   :image_cache, :team_id)
+                                   :image_cache, :team_id, :user_id)
   end
 
   def set_team

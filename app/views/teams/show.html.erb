@@ -3,6 +3,7 @@
     <div class="contents">
 　　　<h3 class="tilte">チーム詳細画面</h3><br>
        <h4>■ チーム名: <%= @team.name %></h4><br>
+        <h4>■チームリーダ：<%= @team.owner.name %></h4>
          <h4>参加者名▼</h4>
          <% @members.each do |member| %>
            <tr>
@@ -17,7 +18,6 @@
             <% end %>
               <%= link_to 'レポート一覧', team_reports_path(@team), class: 'btn btn-default' %>
               <%= link_to 'レポートを新規作成', new_team_report_path(@team), class: 'btn btn-default' %>
-              <%= link_to 'チーム', teams_path, class: 'btn btn-default' %>
           </div>
       </div>
    </div>
