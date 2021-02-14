@@ -24,8 +24,9 @@
             <% end %>
           </tr>
         <% end %>
-
         </table>
   <%= paginate @reports %>
+  <%= bar_chart @graphys %>
+
   <%= link_to 'レポートを新規作成', new_team_report_path(@team), class: 'btn btn-default' %>
 </div>

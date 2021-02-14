@@ -82,3 +82,5 @@ gem 'rails_12factor', group: :production
 gem 'rails_admin', '~> 2.0'
 
 gem 'cancancan'
+
+gem 'chartkick'

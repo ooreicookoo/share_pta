@@ -6,10 +6,11 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.all.order("id DESC").page(params[:page]).per(PER)
+    @graphys = Report.graphy(reports: @reports)
     user_signed_in?
-      @user = User.find(current_user.id)
-      @user = User.new
-      @team = Team.find(params[:team_id])
+    @user = User.find(current_user.id)
+    @user = User.new
+    @team = Team.find(params[:team_id])
   end
 
   def new
@@ -29,8 +30,8 @@ class ReportsController < ApplicationController
   end
 
   def show
-  @report = Report.find(params[:id])
-    @total_time = @report.user.reports.sum(:time)
+    @report = Report.find(params[:id])
+    @total_time = @report.user.sum_report_time
     @report_comments = @report.report_comments
     @report_comment = @report.report_comments.build
     @report_comments = @report.report_comments.order(created_at: :asc)

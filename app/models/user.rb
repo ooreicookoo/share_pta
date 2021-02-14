@@ -20,4 +20,8 @@ class User < ApplicationRecord
   validates :school_year, presence: true
   validates :school_class, presence: true
 
+  def sum_report_time
+    self.reports.sum(:time)
+  end
+
 end
