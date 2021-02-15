@@ -1,10 +1,10 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail, :ensure_user]
+  before_action :ensure_user, only: [:edit, :destroy, :show]
 
   def index
     @teams = Team.all.order(updated_at: :desc)
-    # binding.pry
   end
 
   def new
@@ -59,5 +59,19 @@ class TeamsController < ApplicationController
 
   def set_team
     @team = Team.find(params[:id])
+  end
+
+  def ensure_user
+      @members = @team.members
+      @members.user_id != @current_user.id
+            binding.irb
+      flash[:notice] = "権限がありません"
+      redirect_to teams_path
+  end
+
+
+
+  def assign_params
+    params.permit(:id, :team_id, :user_id, :email)
   end
 end
