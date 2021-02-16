@@ -59,7 +59,7 @@ end
   )
 end
 
-10.times do |k|
+20.times do |k|
   Assign.create!(
     user_id: User.first.id + k,
     team_id: Team.first.id + k

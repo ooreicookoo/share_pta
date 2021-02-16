@@ -75,7 +75,7 @@ class ReportsController < ApplicationController
   end
 
   def ensure_correct_user
-    redirect_to reports_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil?
+    redirect_to teams_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil? 
     # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
   end
 
