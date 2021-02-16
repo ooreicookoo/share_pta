@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :report_comments, dependent: :destroy
   has_many :assigns, dependent: :destroy
-  has_many :teams, foreign_key: :owner_id
+  has_many :owner_teams, foreign_key: :owner_id, source: :team
   has_many :teams, through: :assigns
   has_many :report_comments, dependent: :destroy
 
