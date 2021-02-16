@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail, :ensure_user]
-  before_action :ensure_user, only: [:edit, :destroy, :show]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail] #:ensure_user]
+  # before_action :ensure_user, only: [:edit, :destroy, :show]
 
   def index
     @teams = Team.all.order(updated_at: :desc)
@@ -24,13 +24,14 @@ class TeamsController < ApplicationController
   def show
     @members = @team.members
     @team.owner
+    if @assign != current_user.assigns.find_by(team_id: params[:team_id]) || @team.owner
+  end
   end
 
   def invite
   end
 
   def invite_mail
-    # binding.irb
     InviteMailer.send_mail(@team, team_params[:email]).deliver
     redirect_to team_path(id: @team.id), notice: 'チームに招待するメールを送信しました'
   end
@@ -61,15 +62,13 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
-  def ensure_user
-      @members = @team.members
-      @members.user_id != @current_user.id
-            binding.irb
-      flash[:notice] = "権限がありません"
-      redirect_to teams_path
-  end
-
-
+  # def ensure_user
+  #     @user = User.find(current_user.id)
+  #     @team.assigns
+  #     if @assign != current_user.assigns.find_by(team_id: params[:team_id]) || @team.owner
+  #        redirect_to team_path(id: @team.id),  notice: "権限がありません"
+  #     end
+  # end
 
   def assign_params
     params.permit(:id, :team_id, :user_id, :email)

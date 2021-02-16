@@ -1,18 +1,3 @@
-
-
-
-# 20.times do |k|
-#   Report.create!(
-#   title:"report#{k + 1}",
-#   content: "content#{k + 1}",
-#   time: '2.5',
-#   date: '2020-09-14 00:00:00',
-#   place: '学校',
-#   image: '学校',
-#   user_id: User.first.id + k
-#   )
-# end
-
 # User.create!(
 #              name: '管理者',
 #              email: 'admin@gmail.com',
@@ -54,16 +39,40 @@
 #               )
 # end
 
-10.times do |k|
-    Team.create!(
-    name:"桃三小学校チーム#{k + 1}",
-    owner_id: User.find_by(leader: true).id
-  )
-end
 
-10.times do |k|
-    Team.create!(
-    name:"桃三小学校チーム#{k + 1}",
-    owner_id: User.find_by(admin: true).id
+
+# 10.times do |k|
+#     Team.create!(
+#     name:"桃三小学校チーム#{k + 1}",
+#     owner_id: User.find_by(leader: true).id
+#   )
+# end
+#
+# 10.times do |k|
+#   Team.create!(
+#   name:"桃三小学校チーム#{k + 1}",
+#   owner_id: User.find_by(admin: true).id
+# )
+# end
+
+
+
+# 20.times do |k|
+#   Report.create!(
+#   title:"report#{k + 1}",
+#   content: "content#{k + 1}",
+#   time: '2.5',
+#   date: '2020-09-14 00:00:00',
+#   place: '学校',
+#   image: open("#{Rails.root}/db/fixtures/image#{k}.png"),
+#   user_id: User.first.id + k,
+#   team_id: Team.first.id + k
+#   )
+# end
+
+20.times do |k|
+  ReportComment.create!(
+  comment_content:"comment_content#{k + 1}",
+  report_id: Report.first.id + k
   )
 end
