@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   before_action :ensure_user, only: [:edit, :destroy, :show, :update]
 
   def index
-    @teams = current_user.teams.order(updated_at: :desc)
+    @teams = current_user.assign_teams.order(updated_at: :desc)
   end
 
   def new
@@ -63,8 +63,8 @@ class TeamsController < ApplicationController
   end
 
   def ensure_user
-    redirect_to teams_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil?
-    # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
+    redirect_to teams_path, notice: "権限がありません" if current_user.assign_teams.find_by(id: @team.id).nil?
+    # redirect_to teams_path, notice: "権限がありません" unless current_user.assign_teams.select { |team| team.id == @team.id }.length == 1
   end
 
   def assign_params

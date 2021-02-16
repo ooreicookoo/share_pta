@@ -24,4 +24,14 @@ class User < ApplicationRecord
     self.reports.sum(:time)
   end
 
+
+  def assign_teams
+    self.admin ? Team.all : self.teams
+    # if self.admin
+    #   Team.all
+    # else
+    #   self.teams
+    # end
+  end
+
 end

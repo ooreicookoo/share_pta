@@ -1,16 +1,17 @@
 class ReportsController < ApplicationController
   before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_report, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :update]
   PER = 10
 
   def index
-    @reports = Report.all.order("id DESC").page(params[:page]).per(PER)
-    @graphys = Report.graphy(reports: @reports)
     user_signed_in?
     @user = User.find(current_user.id)
     @user = User.new
     @team = Team.find(params[:team_id])
+    @reports = @team.assign_reports.order("id DESC").page(params[:page]).per(PER)
+    @graphys = Report.graphy(reports: @reports)
+    # @team = current_user.favorites.find_by(blog_id: @blog.id)
   end
 
   def new
@@ -74,13 +75,20 @@ class ReportsController < ApplicationController
   end
 
   def ensure_correct_user
-    @report = Report.find_by(id:params[:id])
-    if @report.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to("/reports")
-    end
+    redirect_to reports_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil?
+    # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
   end
+
+  # def ensure_correct_user
+  #   @report = Report.find_by(id:params[:id])
+  #   if @report.user_id != @current_user.id
+  #     flash[:notice] = "権限がありません"
+  #     redirect_to("/reports")
+  #   end
+  # end
 end
+
+
 
 
 #     route
