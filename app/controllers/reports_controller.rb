@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_report, only: [:edit, :update, :destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :update]
+  # before_action :ensure_correct_user, only: [:edit, :update, :destroy, :update]
   PER = 10
 
   def index
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to team_report_path(@team), notice: "レポートを編集しました！"
+      redirect_to team_reports_path(@team.id), notice: "レポートを編集しました！"
     else
       render :edit
     end
@@ -74,10 +74,10 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
   end
 
-  def ensure_correct_user
-    redirect_to teams_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil? 
-    # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
-  end
+  # def ensure_correct_user
+  #   redirect_to teams_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil?
+  #   # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
+  # end
 
   # def ensure_correct_user
   #   @report = Report.find_by(id:params[:id])

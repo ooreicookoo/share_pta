@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.owner = current_user
     if @team.save
+      # binding.pry
       redirect_to teams_path, notice: 'チームを作成しました！'
     else
       render :new

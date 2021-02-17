@@ -20,7 +20,7 @@
             <td><%= link_to '詳細を確認する', team_report_path(@team, report) %></td>
             <% if report.user.id == current_user.id %>
               <td><%= link_to "レポートを編集する", edit_team_report_path(@team, report) %></td>
-              <td><%= link_to "レポートを削除する", team_report_path(@team, report), method: :delete, data: { confirm: '本当に編集していいですか？' } %></td>
+              <td><%= link_to "レポートを削除する", team_report_path(@team, report), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
             <% end %>
           </tr>
         <% end %>
