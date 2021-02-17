@@ -9,7 +9,7 @@ class Team < ApplicationRecord
   def assign_reports
     Report.where(id:
       self.reports
-        .select { |report| self.assigns.find_by(user_id: report.user_id).present? || report.user.admin || report.user.leader } #report.user.leaderを追記
+        .select { |report| self.assigns.find_by(user_id: report.user_id).present? || report.user.admin || report.user.leader || report.user } #report.user.leaderを追記
         .map(&:id)
     )
   end
