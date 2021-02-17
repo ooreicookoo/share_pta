@@ -5,7 +5,6 @@ class TeamsController < ApplicationController
 
   def index
     @teams = current_user.assign_teams.order(updated_at: :desc)
-     binding.pry
   end
 
   def new

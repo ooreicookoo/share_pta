@@ -2,18 +2,18 @@
 FactoryBot.define do
   # 作成するテストデータの名前を「task」とします
   # （実際に存在するクラス名と一致するテストデータの名前をつければ、そのクラスのテストデータを自動で作成します）
-  factory :team do
-    name { 'Factoryで作ったテストネーム' }
-    owner { FactoryBot.create(:owner) }
+  factory :user_admin do
+    name { 'テストユーザー' }
+    email { 'admin@gmail.com' }
+    email { 'password' }
+    password_confirmation　{ 'password' }
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
   factory :second_team, class: Team do
     name { 'Factoryで作ったテストネーム2' }
-    owner { FactoryBot.create(:owner) }
   end
   factory :third_team, class: Team do
     name { 'Factoryで作ったテストネーム3' }
-    owner { FactoryBot.create(:owner) }
   end
 end

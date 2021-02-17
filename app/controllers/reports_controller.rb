@@ -79,6 +79,7 @@ class ReportsController < ApplicationController
   #   # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
   # end
 
+  
   # def ensure_correct_user
   #   @report = Report.find_by(id:params[:id])
   #   if @report.user_id != @current_user.id
