@@ -13,5 +13,4 @@ class Team < ApplicationRecord
         .map(&:id)
     )
   end
-
 end

@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :report_comments, dependent: :destroy
   has_many :assigns, dependent: :destroy
-  has_many :owner_teams, foreign_key: :owner_id, source: :team
+  # has_many :owner_teams, foreign_key: :owner_id, source: :team
+  has_many :owner_teams, class_name: 'Team', foreign_key: :owner_id
   has_many :teams, through: :assigns
   has_many :report_comments, dependent: :destroy
 
@@ -29,9 +30,9 @@ class User < ApplicationRecord
     if self.admin
       Team.all
     elsif self.leader
-      Team.all
+      self.owner_teams
     else
-      self.teams  
+      self.teams
     end
   end
 
