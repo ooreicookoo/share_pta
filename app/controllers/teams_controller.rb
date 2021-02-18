@@ -3,8 +3,10 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :invite, :invite_mail] #:ensure_user]
   before_action :ensure_user, only: [:edit, :destroy, :show, :update]
 
+  PER = 10
+
   def index
-    @teams = current_user.assign_teams.order(updated_at: :desc)
+    @teams = current_user.assign_teams.order(updated_at: :desc).page(params[:page]).per(PER)
   end
 
   def new
@@ -71,5 +73,5 @@ class TeamsController < ApplicationController
   def assign_params
     params.permit(:id, :team_id, :user_id, :email)
   end
-  
+
 end

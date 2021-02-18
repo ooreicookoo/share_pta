@@ -1,24 +1,30 @@
-<%= form_with(model: @team, local: true) do |form| %>
-  <% if @team.errors.any? %>
-    <div id="errors_explanation">
-      <h2><%= @team.errors.count %>件のエラーがあります。</h2>
-      <ul>
-      <% @team.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="container_position">
+  <div class="container">
+    <div class="contents">
+      <%= form_with(model: @team, local: true) do |form| %>
+      <% if @team.errors.any? %>
+        <div id="errors_explanation">
+          <h3><%= @team.errors.count %>件のエラーがあります。</h3>
+            <ul>
+              <% @team.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="team_name">
-    <%= form.label :チーム名 %>
-    <%= form.text_field :name %>
-  </div><br>
-  <p>例：A小学校/役員<br>
-  例：A小学校/広報<br>
-  例：A小学校/学級、など<br></p>
+      <div class="team_name">
+        <%= form.label :チーム名 %>
+        <%= form.text_field :name %>
+      </div><br>
+      <p>例：A小学校/役員<br>
+      例：A小学校/広報<br>
+      例：A小学校/学級、など<br></p>
 
-  <div class="actions">
-    <%= form.hidden_field :owner_id, value: current_user.id %>
-    <%= form.submit %>
+      <div class="actions">
+        <%= form.hidden_field :owner_id, value: current_user.id %>
+        <%= form.submit %>
+      </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

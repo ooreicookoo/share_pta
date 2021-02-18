@@ -1,12 +1,15 @@
 require 'rails_helper'
 RSpec.describe 'チーム作成機能', type: :system do
   before do
-    FactoryBot.create(:team)
-    FactoryBot.create(:second_team)
-    FactoryBot.create(:third_team)
+    user_admin = FactoryBot.create(:user)
+    # FactoryBot.create(:second_team)
+    # FactoryBot.create(:third_team)
   end
-  describe '新規作成機能' do
-    context 'チームを新規作成した場合' do
+    context 'アドミンユーザーがログインしているとき' do
+      before do　 #アドミンユーザーでログインする↓
+        visit user_session_path
+      end
+      #アドミンユーザーが作成したチームが表示される↓
       it '作成したチームが表示される' do
         visit new_team_path
         fill_in "Factoryで作ったテストネーム", with: 'team'
