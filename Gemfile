@@ -61,7 +61,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener_web'
-  gem 'faker'
 end
 
 group :test do
@@ -89,3 +88,5 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 
 gem 'chartkick'
+
+gem 'faker'
