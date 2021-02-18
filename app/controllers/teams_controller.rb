@@ -71,4 +71,5 @@ class TeamsController < ApplicationController
   def assign_params
     params.permit(:id, :team_id, :user_id, :email)
   end
+  
 end
