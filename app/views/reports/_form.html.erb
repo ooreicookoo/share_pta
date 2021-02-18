@@ -23,7 +23,7 @@
         <br>
         <div class="report_date">
           <%= form.label :実施日 %>
-          <%= form.date_select :date, start_year:Time.now.year, class: 'form-control' %>
+          <%= form.date_select :date, start_year: Date.today.year - 1, class: 'form-control' %>
         </div>
         <br>
         <div class="report_place">
