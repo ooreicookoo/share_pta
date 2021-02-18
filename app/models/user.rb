@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :report_comments, dependent: :destroy
   has_many :assigns, dependent: :destroy
-  has_many :teams, foreign_key: :owner_id
+  # has_many :owner_teams, foreign_key: :owner_id, source: :team
+  has_many :owner_teams, class_name: 'Team', foreign_key: :owner_id
   has_many :teams, through: :assigns
   has_many :report_comments, dependent: :destroy
 
@@ -19,5 +20,20 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :school_year, presence: true
   validates :school_class, presence: true
+
+  def sum_report_time
+    self.reports.sum(:time)
+  end
+
+
+  def assign_teams
+    if self.admin
+      Team.all
+    elsif self.leader
+      self.owner_teams
+    else
+      self.teams
+    end
+  end
 
 end

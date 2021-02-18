@@ -1,15 +1,17 @@
 class ReportsController < ApplicationController
   before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_report, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :ensure_correct_user, only: [:edit, :update, :destroy, :update]
   PER = 10
 
   def index
-    @reports = Report.all.order("id DESC").page(params[:page]).per(PER)
     user_signed_in?
-      @user = User.find(current_user.id)
-      @user = User.new
-      @team = Team.find(params[:team_id])
+    @user = User.find(current_user.id)
+    @user = User.new
+    @team = Team.find(params[:team_id])
+    @reports = @team.assign_reports.order("id DESC").page(params[:page]).per(PER)
+    @graphys = Report.graphy(reports: @reports)
+    # @team = current_user.favorites.find_by(blog_id: @blog.id)
   end
 
   def new
@@ -29,8 +31,8 @@ class ReportsController < ApplicationController
   end
 
   def show
-  @report = Report.find(params[:id])
-    @total_time = @report.user.reports.sum(:time)
+    @report = Report.find(params[:id])
+    @total_time = @report.user.sum_report_time
     @report_comments = @report.report_comments
     @report_comment = @report.report_comments.build
     @report_comments = @report.report_comments.order(created_at: :asc)
@@ -41,7 +43,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to team_report_path(@team), notice: "レポートを編集しました！"
+      redirect_to team_reports_path(@team.id), notice: "レポートを編集しました！"
     else
       render :edit
     end
@@ -72,14 +74,22 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
   end
 
-  def ensure_correct_user
-    @report = Report.find_by(id:params[:id])
-    if @report.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to("/reports")
-    end
-  end
+  # def ensure_correct_user
+  #   redirect_to teams_path, notice: "権限がありません" if current_user.teams.find_by(id: @team.id).nil?
+  #   # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
+  # end
+
+  
+  # def ensure_correct_user
+  #   @report = Report.find_by(id:params[:id])
+  #   if @report.user_id != @current_user.id
+  #     flash[:notice] = "権限がありません"
+  #     redirect_to("/reports")
+  #   end
+  # end
 end
+
+
 
 
 #     route
