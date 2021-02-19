@@ -2,8 +2,8 @@
   <div class="container">
     <div class="contents">
 　　　<h3 class="tilte">チーム詳細画面</h3><br>
-       <h4>■ チーム名: <%= @team.name %></h4><br>
-        <h4>■チームリーダ：<%= @team.owner.name %></h4>
+       <h4>■ チーム名: <%= @team.name %></h4>
+        <h4>■ チームリーダ：<%= @team.owner.name %></h4><br>
          <h4>参加者名▼</h4>
          <% @members.each do |member| %>
            <tr>

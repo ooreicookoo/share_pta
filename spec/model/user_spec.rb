@@ -1,8 +1,6 @@
 require 'rails_helper'
+
 RSpec.describe 'ユーザー新規登録', type: :model do
-  # before do
-  #   FactoryBot.create(user_admin)
-  # end
     describe 'ユーザー登録' do
      it "name、email、passwordとpassword_confirmationが存在すれば登録できること" do
        user = build(:user)

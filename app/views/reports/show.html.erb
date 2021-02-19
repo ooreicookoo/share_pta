@@ -1,23 +1,26 @@
-<div class="container">
-  <h1>レポート詳細画面</h1>
-  <p>投稿者:<%= @report.user.name %></p>
-  <p>タイトル: <%= @report.title %></p>
-  <p>内容: <%= @report.content %></p>
-  <p>実施日: <%= @report.date %></p>
-  <p>場所: <%= @report.place %></p>
-  <p>所要時間: <%= @report.time %>時間</p>
-  <p>所要合算: <%= @total_time %>時間</p>
-  <p>画像:<%= image_tag(@report.image.url) if @report.image && @report.image.url %></p>
-
-<% if @report.user.id == current_user.id %>
-<% end %>
-<hr>
-
-<div id="report_comments_area">
-  <h2>コメント一覧</h2>
-    <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
-    <%= render partial: 'report_comments/index', locals: { report_comments: @report_comments, report: @report } %>
+<div class="container_position">
+  <div class="container">
+    <div class="contents">
+      <h3>レポート詳細画面</h3>
+        <br>
+        <p>投稿者:<%= @report.user.name %></p>
+        <p>タイトル: <%= @report.title %></p>
+        <p>内容: <%= @report.content %></p>
+        <p>実施日: <%= @report.date %></p>
+        <p>場所: <%= @report.place %></p>
+        <p>所要時間: <%= @report.time %>時間</p>
+        <p>所要合算: <%= @total_time %>時間</p>
+        <p>画像:<%= image_tag(@report.image.url) if @report.image && @report.image.url %></p>
+    <% if @report.user.id == current_user.id %>
+    <% end %>
+    <hr>
+      <div id="report_comments_area">
+        <h3>コメント一覧</h3>
+        <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+        <%= render partial: 'report_comments/index', locals: { report_comments: @report_comments, report: @report } %>
+      </div><br>
+      <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+      <%= render partial: 'report_comments/form', locals: { report_comment: @report_comment, report: @report } %>
+   </div>
   </div>
-  <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
-  <%= render partial: 'report_comments/form', locals: { report_comment: @report_comment, report: @report } %>
 </div>
