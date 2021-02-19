@@ -1,16 +1,25 @@
 FactoryBot.define do
 
+  # factory :user_admin, class: User do
+  #   name { 'テストアドミンユーザー' }
+  #   email { 'admin@gmail.com' }
+  #   password { 'password' }
+  #   password_confirmation　{ 'password' }
+  #   school_year {'6'}
+  #   school_class {'1'}
+  #   charge {'アプリ管理'}
+  #   admin {'true'}
+  #   leader {'true'}
+  #   confirmed_at {'Date.today'}
+  # end
+
+ #admin_sign_in用
   factory :user_admin, class: User do
     name { 'テストアドミンユーザー' }
-    email { 'admin@gmail.com' }
+    sequence(:email) { |n| "admin#{n}@gmail.com" }
     password { 'password' }
-    password_confirmation　{ 'password' }
     school_year {'6'}
     school_class {'1'}
-    charge {'アプリ管理'}
-    admin {'true'}
-    leader {'true'}
-    confirmed_at {'Date.today'}
   end
 
   # factory :user_leader do
