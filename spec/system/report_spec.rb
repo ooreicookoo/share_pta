@@ -1,14 +1,24 @@
 require 'rails_helper'
+
 RSpec.describe 'レポート管理機能', type: :system do
   describe '新規作成機能' do
+
     before do
       #アドミンのログイン↓
-      user_a = FactoryBot.create(:user, name: 'ユーザーA', email: 'a@example.com')
+      FactoryBot.create(:admin_user)
       #アドミンの作ったチーム
-      FactoryBot.create(:team, name:'name', owner_id: 'FactoryBot.create(:user).id', user: user_a)
+      FactoryBot.create(:team)
     end
-    context 'レポートを新規作成した場合' do
-      it '作成したレポートが表示される' do
+
+    context 'アドミンがログインしているとき' do
+      before do
+        visit new_user_session_path
+        fill_in "メールアドレス", with: 'admin@gmail.com'
+        fill_in "パスワード", with: 'password'
+        click_button "ログイン"
+      end
+
+      it 'アドミンが作成したレポートが表示される' do
         visit new_team_report(team.id)
         fill_in "test_report_title", with: 'report'
         fill_in "test_report_content", with: 'report'

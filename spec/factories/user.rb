@@ -1,23 +1,38 @@
 FactoryBot.define do
-  factory :user do
+
+  factory :admin_user, class: User do
     name { 'テストアドミンユーザー' }
     email { 'admin@gmail.com' }
+    admin {'true'}
+    leader {'true'}
     # sequence(:email) { |n| "admin#{n}@gmail.com" }
     password { 'password' }
     school_year {'6'}
     school_class {'1'}
     confirmed_at { Date.today }
   end
-  # factory :user do
-  #   name { '一般ユーザー' }
-  #   email { 'federico_stehr@goyette-hauck.co' }
-  #   password { 'password' }
-  #   password_confirmation　{ 'password' }
-  #   school_year {'5'}
-  #   school_class {'3'}
-  #   charge {'リーダー'}
-  #   admin {'false'}
-  #   leader {'true'}
-  #   confirmed_at {'Date.today'}
-  # end
+
+  factory :leader_user, class: User do
+    name { 'テストリーダーユーザー' }
+    email { 'leader@gmail.com' }
+    admin {'false'}
+    leader {'true'}
+    # sequence(:email) { |n| "admin#{n}@gmail.com" }
+    password { 'password' }
+    school_year {'5'}
+    school_class {'3'}
+    confirmed_at { Date.today }
+  end
+
+  factory :user, class: User do
+    name { 'テストユーザー' }
+    email { 'federico_stehr@goyette-hauck.co' }
+    admin {'false'}
+    leader {'false'}
+    # sequence(:email) { |n| "admin#{n}@gmail.com" }
+    password { 'password' }
+    school_year {'2'}
+    school_class {'2'}
+    confirmed_at { Date.today }
+  end
 end
