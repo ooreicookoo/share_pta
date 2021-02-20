@@ -26,10 +26,10 @@ RSpec.describe 'チーム管理機能', type: :system do
 
     context '任意のチーム詳細画面に遷移した場合' do
       it '該当のチーム詳細ページが表示される' do
-        team = FactoryBot.create(:admin_team)
+        team = FactoryBot.create(:team, name:'最初のチーム名')
         visit teams_path(team.id)
         click_button "Show"
-        expect(page).to have_content 'チーム詳細画面'
+        expect(page).to have_content 'team'
       end
     end
 
