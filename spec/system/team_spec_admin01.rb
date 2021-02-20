@@ -32,13 +32,13 @@ RSpec.describe 'チーム管理機能', type: :system do
           expect(page).to have_no_content 'チーム一覧'
         end
 
-      # context '任意のチーム詳細画面に遷移した場合' do
-      #   before do
-      #     visit team_path(team.id)
-      #     click_button "show"
-      #     expect(page).to have_content 'チーム詳細画面'
-      #   end
-      # end
+        context '任意のチーム詳細画面に遷移した場合' do
+          before do
+            visit team_path(team.id)
+            click_button "show"
+            expect(page).to have_content 'チーム詳細画面'
+          end
+        end    
        end
       end
     end

@@ -31,7 +31,7 @@ RSpec.describe 'レポート管理機能', type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのレポート一覧が表示される' do
-        report = FactoryBot.create(:team, title: 'task', date: '2020-09-14 00:00:00', time: '2.5', place: 'place')
+        report = FactoryBot.create(:team)
         visit team_reports_path(team.id)
         expect(page).to have_content 'report'
       end
@@ -40,7 +40,7 @@ RSpec.describe 'レポート管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のレポート詳細画面に遷移した場合' do
        it '該当レポートの内容が表示される' do
-         report = FactoryBot.create(:report, title: 'title', content: 'content', time: '2.5', date: '2020-09-14 00:00:00', place: 'place')
+         FactoryBot.create(:report)
         visit team_report_path(team.id, report.id)
         expect(page).to have_content 'team'
        end
