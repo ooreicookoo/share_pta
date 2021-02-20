@@ -2,10 +2,10 @@ FactoryBot.define do
 
   factory :admin_user, class: User do
     name { 'テストアドミンユーザー' }
-    email { 'admin@gmail.com' }
+    # email { 'admin@gmail.com' }
+    sequence(:email) { |n| "admin#{n}@gmail.com" }
     admin {'true'}
     leader {'true'}
-    # sequence(:email) { |n| "admin#{n}@gmail.com" }
     password { 'password' }
     school_year {'6'}
     school_class {'1'}
@@ -14,10 +14,10 @@ FactoryBot.define do
 
   factory :leader_user, class: User do
     name { 'テストリーダーユーザー' }
-    email { 'leader@gmail.com' }
+    # email { 'leader@gmail.com' }
+    sequence(:email) { |n| "leader#{n}@gmail.com" }
     admin {'false'}
     leader {'true'}
-    # sequence(:email) { |n| "admin#{n}@gmail.com" }
     password { 'password' }
     school_year {'5'}
     school_class {'3'}
@@ -26,7 +26,8 @@ FactoryBot.define do
 
   factory :user, class: User do
     name { 'テストユーザー' }
-    email { 'federico_stehr@goyette-hauck.co' }
+    # email { 'federico_stehr@goyette-hauck.co' }
+    sequence(:email) { |n| "federico_stehr#{n}@goyette-hauck.co" }
     admin {'false'}
     leader {'false'}
     # sequence(:email) { |n| "admin#{n}@gmail.com" }
