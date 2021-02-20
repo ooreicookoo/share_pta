@@ -26,11 +26,9 @@ FactoryBot.define do
 
   factory :user, class: User do
     name { 'テストユーザー' }
-    # email { 'federico_stehr@goyette-hauck.co' }
-    sequence(:email) { |n| "federico_stehr#{n}@goyette-hauck.co" }
+    email { 'federico_stehr@goyette-hauck.co' }
     admin {'false'}
     leader {'false'}
-    # sequence(:email) { |n| "admin#{n}@gmail.com" }
     password { 'password' }
     school_year {'2'}
     school_class {'2'}

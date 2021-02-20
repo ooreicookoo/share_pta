@@ -25,7 +25,9 @@
     </tbody>
     </table><br>
     <%= paginate @teams %><br>
+    <% if current_user.leader? || current_user.admin?  %>
     <%= link_to 'New Team', new_team_path, class: 'btn btn-default' %>
+    <% end %>
     </div>
   </div>
 </div>

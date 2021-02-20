@@ -1,12 +1,15 @@
 class Report < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 1, maximum: 100 }
-  validates :time, presence: true
-  validates :date, presence: true
-  validates :content, length: { maximum: 1000 }
-  mount_uploader :image, ImageUploader
   belongs_to :user
   belongs_to :team
   has_many :report_comments, dependent: :destroy
+
+  mount_uploader :image, ImageUploader
+
+  validates :title, presence: true, length: { minimum: 1, maximum: 100 }
+  validates :time, presence: true
+  validates :content, presence: true
+  validates :date, presence: true
+  validates :content, length: { maximum: 1000 }
 
   def self.graphy(reports: [])
     reports = reports || Report.all
