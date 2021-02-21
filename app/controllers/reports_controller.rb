@@ -26,6 +26,8 @@ class ReportsController < ApplicationController
     else
       if @report.save
         redirect_to team_reports_path(@report.team.id), notice: "レポートを作成しました！"
+      else
+        render :new
       end
     end
   end
@@ -53,7 +55,7 @@ class ReportsController < ApplicationController
     @report.destroy
     redirect_to team_reports_path(@team.id), notice:"レポートを削除しました！"
   end
-  
+
   def confirm
   # binding.irb
     @report = current_user.reports.build(report_params)
