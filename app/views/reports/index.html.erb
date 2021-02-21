@@ -1,7 +1,7 @@
 <div class="container_position">
   <div class="container">
     <div class="contents">
-      <h4>■ チーム名: <%= @team.name %></h4>
+      <h4 class="reports-index__teams-item">■ チーム名: <%= @team.name %></h4>
         <h3 class="title">レポート一覧</h3>
       　　<nav class="menu">
             <table>
@@ -13,12 +13,22 @@
                 <th>名前</th>
               </tr>
             <% @reports.each do |report| %>
-              <tr>
-                <td><%= report.date %></td>
-                <td><%= report.title %></td>
-                <td><%= report.place %></td>
-                <td><%= report.time %>時間</td>
-                <td><%= report.user.name %></td>
+              <tr id=<%="reports-index__reports--#{report.id}"%>>
+                <td id=<%="reports-index__reports--#{report.id}__date"%>>
+                  <%= report.date %>
+                </td>
+                <td id=<%="reports-index__reports--#{report.id}__title"%>>
+                  <%= report.title %>
+                </td>
+                <td id=<%="reports-index__reports--#{report.id}__place"%>>
+                  <%= report.place %>
+                </td>
+                <td id=<%="reports-index__reports--#{report.id}__time"%>>
+                  <%= report.time %>時間
+                </td>
+                <td id=<%="reports-index__reports--#{report.id}__user"%>>
+                  <%= report.user.name %>
+                </td>
                 <td><%= link_to '詳細を確認する', team_report_path(@team, report) %></td>
                 <% if report.user.id == current_user.id %>
                   <td><%= link_to "レポートを編集する", edit_team_report_path(@team, report) %></td>

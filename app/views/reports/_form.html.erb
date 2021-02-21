@@ -14,37 +14,37 @@
       <% end %>
         <div class="report_title">
           <%= form.label :タイトル %>
-          <%= form.text_field :title %>
+          <%= form.text_field :title, id: "reports-form__title" %>
         </div><br>
         <div class="report_content">
           <%= form.label :内容 %>
-          <%= form.text_area :content %>
+          <%= form.text_area :content, id: "reports-form__content" %>
         </div>
         <br>
         <div class="report_date">
           <%= form.label :実施日 %>
-          <%= form.date_select :date, start_year: Date.today.year - 1, class: 'form-control' %>
+          <%= form.date_select :date, start_year: Date.today.year - 1, class: 'form-control', id: "reports-form__date" %>
         </div>
         <br>
         <div class="report_place">
           <%= form.label :作業場所 %>
-          <%= form.text_field :place, class: 'form-control' %>
+          <%= form.text_field :place, class: 'form-control', id: "reports-form__place" %>
         </div>
         <br>
         <div class="report_time">
           <%= form.label :所要時間 %>
-          <p><%= form.number_field :time, placeholder: "0.5時間(30分)単位で入力", step: '0.5' , min: '0.5', max: '24', class: 'form-control' %>時間</p>
+          <p><%= form.number_field :time, placeholder: "0.5時間(30分)単位で入力", step: '0.5' , min: '0.5', max: '24', class: 'form-control', id: "reports-form__time" %>時間</p>
         </div>
         <div class="report_image">
           <%= form.label :image %>
           <%= image_tag(@report.image.url) if @report.image && @report.image.url %>
           <%= form.file_field :image %>
-          <%= form.hidden_field :image_cache %>
+          <%= form.hidden_field :image_cache, id: "reports-form__image"%>
         </div>
         <br>
         <div class="actions">
           <%= form.hidden_field :team_id, value: @team.id %>
-          <%= form.submit %>
+          <%= form.submit id: "reports-form__submit" %>
         </div>
       <% end %>
     </div>

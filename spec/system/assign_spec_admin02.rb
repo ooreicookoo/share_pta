@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'アサイン招待機能', type: :system do
-  describe '招待機能機能' do
+  describe '招待機能' do
     #任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
     before do
       FactoryBot.create(:admin_user) #アドミンのログイン
@@ -29,7 +29,7 @@ RSpec.describe 'アサイン招待機能', type: :system do
       end
 
       context 'アドミンが任意の詳細画面に遷移したとき' do
-        it '該当タスクの内容が表示される' do
+        it '該当チームの内容が表示される' do
           admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
           visit team_path(admin_team)
           expect(
