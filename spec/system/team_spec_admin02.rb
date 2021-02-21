@@ -6,27 +6,46 @@ RSpec.describe 'チーム管理機能', type: :system do
     before do
       FactoryBot.create(:admin_user) #アドミンのログイン
       FactoryBot.create(:admin_team) #アドミンの作ったチーム
-      end
+    end
 
     context 'アドミンがログインしているとき' do
       before do
         visit new_user_session_path
-        fill_in "メールアドレス", with: 'admin@gmail.com'
-        fill_in "パスワード", with: 'password'
-        click_button "ログイン"
+        fill_in "sessions-new__email", with: FactoryBot.build(:admin_user).email
+        fill_in "sessions-new__password", with: FactoryBot.build(:admin_user).password
+        click_button "sessions-new__submit"
+        visit teams_path
       end
 
       it 'アドミンが作成したチームが一覧に表示される' do
-        visit new_team_path
-          expect(page).to have_content 'チーム一覧'
+        admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+        visit teams_path
+        expect(
+          find_by_id(
+            "teams-index__teams--#{admin_team.id}"
+          )
+        ).to have_content admin_team.name
       end
 
-    context 'リーダーがログインしているとき' do
-      let(:login_user) { leader_user }
-
-      it 'アドミンが作成したチームが表示されない' do
-        expect(page).to have_no_content '最初のチーム名_by_admin'
+      context 'アドミンが任意の詳細画面に遷移したとき' do
+        it '該当タスクの内容が表示される' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          visit team_path(admin_team)
+          expect(
+            find_by_id(
+              "teams-show__team_name"
+            )
+          ).to have_content admin_team.name
+        end
       end
     end
   end
 end
+
+# def team_path(model = nil, id: nil)
+#   if id == nil
+#     id = model.id
+#   end
+#   # /teams/:id
+#   return "/teams/#{id}"
+# end

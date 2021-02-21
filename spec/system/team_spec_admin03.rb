@@ -3,44 +3,45 @@ require 'rails_helper'
 RSpec.describe 'チーム管理機能', type: :system do
   describe '新規作成機能' do
     before do
-      #アドミンのログイン↓
-      FactoryBot.create(:admin_user)
-      #アドミンの作ったチーム
-      FactoryBot.create(:admin_team)
+      FactoryBot.create(:admin_user) #アドミンのログイン
+      FactoryBot.create(:admin_team) #アドミンの作ったチーム
     end
+
     context 'アドミンがログインしているとき' do
       before do
         visit new_user_session_path
-        fill_in "メールアドレス", with: 'admin@gmail.com'
-        fill_in "パスワード", with: 'password'
-        click_button "ログイン"
+        fill_in "sessions-new__email", with: FactoryBot.build(:admin_user).email
+        fill_in "sessions-new__password", with: FactoryBot.build(:admin_user).password
+        click_button "sessions-new__submit"
+        visit teams_path
       end
-      it 'アドミンが作成したチームが表示される' do
-        expect(page).to have_content 'チーム一覧'
-      end
-
-      it 'アドミンが作成したチームと全てのチーム一覧が表示される' do
-        expect(page).to have_content 'チーム一覧'
-      end
-    end
-
-    context '任意のチーム詳細画面に遷移した場合' do
-      it '該当のチーム詳細ページが表示される' do
-        team = FactoryBot.create(:team, name:'最初のチーム名')
-        visit teams_path(team.id)
-        click_button "Show"
-        expect(page).to have_content 'team'
+      it 'アドミンが作成したチームがリーダのページには表示される' do
+        admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+        expect(
+          find_by_id(
+            "teams-index__teams--#{admin_team.id}"
+          )
+        ).to have_content admin_team.name
       end
     end
 
-      # context 'リーダーがログインしているとき' do
-      #   before do
-      #       FactoryBot.create(:leader_user)
-      #     visit new_user_session_path
-      #     fill_in "メールアドレス", with: 'leader@gmail.com'
-      #     fill_in "パスワード", with: 'password'
-      #     click_button "ログイン"
-      #   end
-
+    context 'リーダーがログインしているとき' do
+      before do
+        visit new_user_session_path
+        fill_in "sessions-new__email", with: FactoryBot.build(:admin_user).email
+        fill_in "sessions-new__password", with: FactoryBot.build(:admin_user).password
+        click_button "sessions-new__submit"
+        visit teams_path
+      end
+      #↓アドミン用の記述
+      it 'アドミンが作成したチームがリーダのページには表示されない' do
+        admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+        expect(
+          find_by_id(
+            "teams-index__teams--#{admin_team.id}"
+          )
+        ).to have_content admin_team.name
+      end
+    end
   end
 end
