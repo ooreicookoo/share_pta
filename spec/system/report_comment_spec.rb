@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'レポート機能', type: :system do
+RSpec.describe 'レポートコメント機能', type: :system do
   describe 'レポート作成機能' do
     #任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
     before do
@@ -82,6 +82,22 @@ RSpec.describe 'レポート機能', type: :system do
           ).to have_content 'レポート詳細画面'
         end
       end
+
+      context 'アドミンが任意のレポート詳細画面に遷移したとき' do
+        it 'コメントを投稿出来る' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          report = Report.last
+          visit team_report_path(admin_team, report)
+          fill_in "reports-coment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          expect(
+            find_by_id(
+              "reports-coment-form__comment_title"
+            )
+          ).to have_content 'コメント'
+        end
+      end
+
+
     end
   end
 end

@@ -10,8 +10,8 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label :コメント %>
-    <%= form.text_area :comment_content %>
+    <%= form.label :コメント, id: "reports-coment-form__comment_title" %>
+    <%= form.text_area :comment_content, id: "reports-coment-form__comment" %>
   </div>
   <div class="actions">
     <%= form.submit %>
