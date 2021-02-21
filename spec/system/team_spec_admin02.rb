@@ -38,6 +38,17 @@ RSpec.describe 'チーム管理機能', type: :system do
           ).to have_content admin_team.name
         end
       end
+      context 'アドミンがチームをチームを作成したとき' do
+        it 'アドミンもチームにアサインし表示される' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          visit team_path(admin_team)
+          expect(
+            find_by_id(
+              "teams-show__team_name"
+            )
+          ).to have_content admin_team.name
+        end
+      end
     end
   end
 end
