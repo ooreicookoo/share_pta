@@ -12,7 +12,7 @@ RSpec.describe 'チーム管理機能', type: :system do
       context 'アドミンがログインしているとき' do
         before do
           visit new_user_session_path
-          fill_in "メールアドレス", with: 'admin@gmail.com'
+          fill_in "メールアドレス", with: '|n| "admin#{n}@gmail.com"'
           fill_in "パスワード", with: 'password'
           click_button "ログイン"
         end
