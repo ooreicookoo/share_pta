@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'チーム管理機能', type: :system do
-  describe '詳細ページ表示機能' do
+RSpec.describe 'レポート機能', type: :system do
+  describe 'レポート作成機能' do
     #任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
     before do
       FactoryBot.create(:admin_user) #アドミンのログイン
       FactoryBot.create(:admin_team) #アドミンの作ったチーム
+      FactoryBot.create(:report)
     end
 
     context 'アドミンがログインしているとき' do
@@ -38,20 +39,54 @@ RSpec.describe 'チーム管理機能', type: :system do
           ).to have_content admin_team.name
         end
       end
-      context 'アドミンがチームをチームを作成したとき' do
-        it 'アドミンもチームにアサインし表示される' do
+
+      context '該当チームからレポート新規作成した場合' do
+        it '「作成したレポートが一覧表示される」' do
           admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
-          visit team_path(admin_team)
+          visit new_team_report_path(admin_team)
+          fill_in "reports-form__title", with: FactoryBot.build(:report).title
+          fill_in "reports-form__content", with: FactoryBot.build(:report).content
+          fill_in "reports-form__time", with: FactoryBot.build(:report).time
+          click_button "reports-form__submit"
+          click_button "reports--confirm__submit"
+          report = Report.last
+          # nil = !!nil => false
+          # 1 = !!1 => true
+          # expect(
+          #   !!find_by_id(
+          #     "reports-index__reports--#{report.id}"
+          #   )
+          # ).to be true
           expect(
             find_by_id(
-              "teams-show__team_name"
+              "reports-index__reports--#{report.id}__title"
             )
-          ).to have_content admin_team.name
+          ).to have_content report.title
+          expect(
+            find_by_id(
+              "reports-index__reports--#{report.id}__user"
+            )
+          ).to have_content report.user.name
+        end
+      end
+
+      context 'アドミンが任意のレポーtp詳細画面に遷移したとき' do
+        it '該当レポートの内容が表示される' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          report = Report.last
+          visit team_report_path(admin_team, report)
+          expect(
+            find_by_id(
+              "report-show_index"
+            )
+          ).to have_content 'レポート詳細画面'
         end
       end
     end
   end
 end
+
+
 
 # def team_path(model = nil, id: nil)
 #   if id == nil
