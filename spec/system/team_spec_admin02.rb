@@ -1,27 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe 'チーム管理機能', type: :system do
-  describe '一覧表示機能' do
-    #各種権限ユーザーログイン↓
-    let(:admin_user) { FactoryBot.create(:admin_user) }
-    let(:leader_user) { FactoryBot.create(:leader_user) }
-    let(:user) { FactoryBot.create(:user) }
-
+  describe '詳細ページ表示機能' do
+    #任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
     before do
-      FactoryBot.create(:admin_team)
-      visit new_user_session_path
-      fill_in "メールアドレス", with: 'login_user.email'
-      fill_in "パスワード", with: 'login_user.password'
-      click_button "ログイン"
-    end
+      FactoryBot.create(:admin_user) #アドミンのログイン
+      FactoryBot.create(:admin_team) #アドミンの作ったチーム
+      end
 
     context 'アドミンがログインしているとき' do
-      let(:login_user) { admin_user }
-
-      it 'アドミンが作成したチームが表示される' do
-        expect(page).to have_content '最初のチーム名_by_admin'
+      before do
+        visit new_user_session_path
+        fill_in "メールアドレス", with: 'admin@gmail.com'
+        fill_in "パスワード", with: 'password'
+        click_button "ログイン"
       end
-    end
+
+      it 'アドミンが作成したチームが一覧に表示される' do
+        visit new_team_path
+          expect(page).to have_content 'チーム一覧'
+      end
 
     context 'リーダーがログインしているとき' do
       let(:login_user) { leader_user }
