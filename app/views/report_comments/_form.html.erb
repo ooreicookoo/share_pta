@@ -11,9 +11,9 @@
   <% end %>
   <div class="field">
     <%= form.label :コメント, id: "reports-coment-form__comment_title" %>
-    <%= form.text_area :comment_content, id: "reports-coment-form__comment" %>
+    <%= form.text_area :comment_content, id: "reports-comment-form__comment" %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  id:"reports-coment-form__comment_submit" %>
   </div>
 <% end %>

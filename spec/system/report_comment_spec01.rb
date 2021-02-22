@@ -89,6 +89,7 @@ RSpec.describe 'レポートコメント機能', type: :system do
           report = Report.last
           visit team_report_path(admin_team, report)
           fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          click_button "reports-coment-form__comment_submit"
           expect(
             find_by_id(
               "reports-coment-form__comment_title"
@@ -97,17 +98,63 @@ RSpec.describe 'レポートコメント機能', type: :system do
         end
       end
 
+      context 'アドミンが任意のレポート削除画面に遷移したとき' do
+        it 'コメントを削除出来る' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          report = Report.last
+          visit team_report_path(admin_team, report)
+          fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          click_button "reports-coment-form__comment_submit"
+          report_comment= ReportComment.last
+          visit team_report_path(admin_team, report, report_comment)
+          click_on "reports-comment_form__delete"
+          page.driver.browser.switch_to.alert.accept
+          expect(
+            find_by_id(
+              "reports-coment-form__comment_title"
+            )
+          ).to have_content "コメント"
+        end
+      end
 
+      context 'アドミンが任意のレポート削除画面に遷移したとき' do
+        it 'コメントを削除出来る' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          report = Report.last
+          visit team_report_path(admin_team, report)
+          fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          click_button "reports-coment-form__comment_submit"
+          report_comment= ReportComment.last
+          visit team_report_path(admin_team, report, report_comment)
+          click_on "reports-comment_form__delete"
+          page.driver.browser.switch_to.alert.accept
+          expect(
+            find_by_id(
+              "reports-coment-form__comment_title"
+            )
+          ).to have_content "コメント"
+        end
+      end
+
+      context 'アドミンが任意のレポート編集画面に遷移したとき' do
+        it 'コメントを編集出来る' do
+          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          report = Report.last
+          visit team_report_path(admin_team, report)
+          fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          click_button "reports-coment-form__comment_submit"
+          report_comment= ReportComment.last
+          visit team_report_path(admin_team, report, report_comment)
+          click_on "reports-comment_form__edit"
+          fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
+          click_button "report_comment_comment_content_submit"
+          expect(
+            find_by_id(
+              "reports-coment-form__comment_title"
+            )
+          ).to have_content "コメント"
+        end
+      end
     end
   end
 end
-
-
-
-# def team_path(model = nil, id: nil)
-#   if id == nil
-#     id = model.id
-#   end
-#   # /teams/:id
-#   return "/teams/#{id}"
-# end
