@@ -1,27 +1,53 @@
 require 'rails_helper'
-RSpec.describe 'team作成機能', type: :model do
+RSpec.describe 'ユーザー機能', type: :model do
     before do
-      @user = FactoryBot.create(:admin_user)
-    end
-    before do
-      @team = FactoryBot.create(:admin_team)
+      @user = FactoryBot.create(:user)
     end
 
   describe 'バリデーションのテスト' do
-    context 'Teamのnameが空の場合' do
+    context 'userのnameが空の場合' do
       it 'バリデーションにひっかる' do
-        @team = Team.new(name: '')
-        expect(@team).not_to be_valid
+        @user = User.new(name: '')
+        expect(@user).not_to be_valid
       end
     end
 
-    context 'Teamのnameが重複した場合' do
+    context 'userのemailが空の場合' do
       it 'バリデーションにひっかる' do
-        @team = Team.new(name: '')
-        @team1 = Team.new(name: '')
-        expect(@team).not_to be_valid
+        @user = User.new(email: '')
+        expect(@user).not_to be_valid
       end
     end
+
+    context 'userのemailが空の場合' do
+      it 'バリデーションにひっかる' do
+        @user = User.new(email: '')
+        expect(@user).not_to be_valid
+      end
+    end
+
+    context 'userのemailが重複した場合' do
+      it 'バリデーションにひっかる' do
+        @user = User.new(email: '')
+        @user1 = User.new(email: '')
+        expect(@user).not_to be_valid
+      end
+    end
+
+    context 'userのschool_yearが空の場合' do
+      it 'バリデーションにひっかる' do
+        @user = User.new(school_year: '')
+        expect(@user).not_to be_valid
+      end
+    end
+
+    context 'userのschool_classが空の場合' do
+      it 'バリデーションにひっかる' do
+        @user = User.new(school_class: '')
+        expect(@user).not_to be_valid
+      end
+    end
+
   end
     # context 'Productのpriceが空の場合' do
     #   it 'バリデーションにひっかかる' do
