@@ -28,7 +28,7 @@ RSpec.describe 'レポート機能', type: :system do
         ).to have_content admin_team.name
       end
 
-      context 'アドミンが任意の詳細画面に遷移したとき' do
+      context 'アドミンが任意のチーム詳細画面に遷移したとき' do
         it '該当チームの内容が表示される' do
           admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
           visit team_path(admin_team)
@@ -41,7 +41,7 @@ RSpec.describe 'レポート機能', type: :system do
       end
 
       context '該当チームからレポート新規作成した場合' do
-        it '「作成したレポートが一覧表示される」' do
+        it '作成したレポートが一覧表示され、負担指数のグラフが見られる' do
           admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
           visit new_team_report_path(admin_team)
           fill_in "reports-form__title", with: FactoryBot.build(:report).title

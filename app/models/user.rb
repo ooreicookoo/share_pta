@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :teams, through: :assigns
   has_many :report_comments, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   before_validation { email.downcase! }
   validates :email, presence: true, length: { maximum: 255 },

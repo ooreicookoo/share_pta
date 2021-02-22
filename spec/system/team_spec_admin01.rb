@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'チーム管理機能', type: :system do
+RSpec.describe 'チーム管理機能ー権限', type: :system do
   describe '新規作成機能' do
     before do
       FactoryBot.create(:admin_user) #アドミンのログイン

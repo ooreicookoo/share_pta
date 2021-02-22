@@ -1,49 +1,49 @@
 require 'rails_helper'
 
-RSpec.describe 'レポートコメント機能', type: :system do
+RSpec.describe 'レポート機能', type: :system do
   describe 'レポート作成機能' do
     #任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
     before do
-      FactoryBot.create(:admin_user) #アドミンのログイン
-      FactoryBot.create(:admin_team) #アドミンの作ったチーム
+      FactoryBot.create(:leader_user) #リーダーのログイン
+      FactoryBot.create(:leader_team) #リーダーの作ったチーム
       FactoryBot.create(:report)
     end
 
-    context 'アドミンがログインしているとき' do
+    context 'リーダーがログインしているとき' do
       before do
         visit new_user_session_path
-        fill_in "sessions-new__email", with: FactoryBot.build(:admin_user).email
-        fill_in "sessions-new__password", with: FactoryBot.build(:admin_user).password
+        fill_in "sessions-new__email", with: FactoryBot.build(:leader_user).email
+        fill_in "sessions-new__password", with: FactoryBot.build(:leader_user).password
         click_button "sessions-new__submit"
         visit teams_path
       end
 
-      it 'アドミンが作成したチームが一覧に表示される' do
-        admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+      it 'リーダーが作成したチームが一覧に表示される' do
+        leader_team = Team.find_by(name: FactoryBot.build(:leader_team).name)
         visit teams_path
         expect(
           find_by_id(
-            "teams-index__teams--#{admin_team.id}"
+            "teams-index__teams--#{leader_team.id}"
           )
-        ).to have_content admin_team.name
+        ).to have_content leader_team.name
       end
 
-      context 'アドミンが任意の詳細画面に遷移したとき' do
+      context 'リーダーが任意のチーム詳細画面に遷移したとき' do
         it '該当チームの内容が表示される' do
-          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
-          visit team_path(admin_team)
+          leader_team = Team.find_by(name: FactoryBot.build(:leader_team).name)
+          visit team_path(leader_team)
           expect(
             find_by_id(
               "teams-show__team_name"
             )
-          ).to have_content admin_team.name
+          ).to have_content leader_team.name
         end
       end
 
       context '該当チームからレポート新規作成した場合' do
-        it '「作成したレポートが一覧表示される」' do
-          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
-          visit new_team_report_path(admin_team)
+        it '作成したレポートが一覧表示され、負担指数のグラフが見られる' do
+          leader_team = Team.find_by(name: FactoryBot.build(:leader_team).name)
+          visit new_team_report_path(leader_team)
           fill_in "reports-form__title", with: FactoryBot.build(:report).title
           fill_in "reports-form__content", with: FactoryBot.build(:report).content
           fill_in "reports-form__time", with: FactoryBot.build(:report).time
@@ -70,11 +70,11 @@ RSpec.describe 'レポートコメント機能', type: :system do
         end
       end
 
-      context 'アドミンが任意のレポート詳細画面に遷移したとき' do
+      context 'リーダーが任意のレポート詳細画面に遷移したとき' do
         it '該当レポートの内容が表示される' do
-          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
+          leader_team = Team.find_by(name: FactoryBot.build(:leader_team).name)
           report = Report.last
-          visit team_report_path(admin_team, report)
+          visit team_report_path(leader_team, report)
           expect(
             find_by_id(
               "report-show_index"
@@ -82,22 +82,6 @@ RSpec.describe 'レポートコメント機能', type: :system do
           ).to have_content 'レポート詳細画面'
         end
       end
-
-      context 'アドミンが任意のレポート詳細画面に遷移したとき' do
-        it 'コメントを投稿出来る' do
-          admin_team = Team.find_by(name: FactoryBot.build(:admin_team).name)
-          report = Report.last
-          visit team_report_path(admin_team, report)
-          fill_in "reports-comment-form__comment", with: FactoryBot.build(:report_comment).comment_content
-          expect(
-            find_by_id(
-              "reports-coment-form__comment_title"
-            )
-          ).to have_content 'コメント'
-        end
-      end
-
-
     end
   end
 end
