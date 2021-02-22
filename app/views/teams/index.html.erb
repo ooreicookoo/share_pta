@@ -12,7 +12,7 @@
       <tbody>
       <% @teams.each do |team| %>
         <tr>
-          <td>■ <%= team.name %></td>
+          <td class="teams-index__teams-item" id=<%="teams-index__teams--#{team.id}"%> >■ <%= team.name %></td>
           <% if current_user.leader? %>
             <td><%= link_to 'Show', team %></td>
             <td><%= link_to 'Edit', edit_team_path(team) %></td>
@@ -24,8 +24,12 @@
       <% end %>
     </tbody>
     </table><br>
+    <div class="team_link">
     <%= paginate @teams %>
-    <%= link_to 'New Team', new_team_path, class: 'btn btn-default' %>
+    </div>
+      <% if current_user.leader? || current_user.admin?  %>
+      <%= link_to 'New Team', new_team_path, class: 'btn btn-default' %>
+    <% end %>
     </div>
   </div>
 </div>

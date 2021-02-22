@@ -50,6 +50,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -67,7 +68,6 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-
   gem 'webdrivers'
 end
 

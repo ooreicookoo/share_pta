@@ -7,12 +7,12 @@
       <p>チームに招待したい人のメールアドレス入力してください</p>
         <div class="team_name">
           <%= form.label :email %>
-          <%= form.text_field :email, placeholder: "emailアドレスを入力", required: true  %>
+          <%= form.text_field :email, placeholder: "emailアドレスを入力", required: true, id: "team-invite__mail" %>
         </div>
         <br>
           <div class="actions">
             <%= form.hidden_field :owner_id, value: current_user.id %>
-            <%= form.submit "招待メールを送信する"%>
+            <%= form.submit "招待メールを送信する", id: "team-invite__submit" %>
           </div>
       <% end %>
     </div>

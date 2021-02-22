@@ -2,10 +2,10 @@
   <div class="container">
     <div class="contents">
       <%= form_with(model: @team, local: true) do |form| %>
-      <% if @team.errors.any? %>
-        <div id="errors_explanation">
-          <h3><%= @team.errors.count %>件のエラーがあります。</h3>
-            <ul>
+        <% if @team.errors.any? %>
+          <div id="errors_explanation">
+            <h3><%= @team.errors.count %>件のエラーがあります。</h3>
+              <ul>
               <% @team.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
               <% end %>

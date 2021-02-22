@@ -21,11 +21,13 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.build(report_params)
     @report.team_id = @team.id
-      if params[:back]
-        render :new
-      else
+    if params[:back]
+      render :new
+    else
       if @report.save
         redirect_to team_reports_path(@report.team.id), notice: "レポートを作成しました！"
+      else
+        render :new
       end
     end
   end
@@ -53,6 +55,7 @@ class ReportsController < ApplicationController
     @report.destroy
     redirect_to team_reports_path(@team.id), notice:"レポートを削除しました！"
   end
+
   def confirm
   # binding.irb
     @report = current_user.reports.build(report_params)
@@ -79,7 +82,7 @@ class ReportsController < ApplicationController
   #   # redirect_to teams_path, notice: "権限がありません" unless current_user.teams.select { |team| team.id == @team.id }.length == 1
   # end
 
-  
+
   # def ensure_correct_user
   #   @report = Report.find_by(id:params[:id])
   #   if @report.user_id != @current_user.id

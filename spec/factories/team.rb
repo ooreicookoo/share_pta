@@ -1,23 +1,32 @@
-# 「FactoryBotを使用します」という記述
 FactoryBot.define do
 
-  factory :team do
-    name { '最初のチーム名' }
-    owner_id { 'FactoryBot.create(:user).id' } 
-    user
+  #アドミンの作成したチーム
+  factory :admin_team, class: Team do
+    name { 'チーム名_by_admin' }
+    # sequence(:name) { |n| "最初のチーム名_by_admin#{n}" }
+    # owner_id { '1' } #アドミンのオーナーID
+    owner_id {
+      (
+        User.find_by(email: FactoryBot.build(:admin_user).email) || FactoryBot.create(:admin_user)
+      ).id
+    }
+    # # user { FactoryBot.create :admin_user }
+    # sequence(:user) { |n| "User.find_by(admin: true)#{n}.id" }
+    # association :user, factory: :admin_user
   end
 
-  # factory :second_team, class: Team do
-  #   name { 'Factoryで作ったテストネーム2' }
-  #   owner { FactoryBot.create(:owner) }
-  #   association :user, factory: :user_leader
-  # end
-  #
-  # factory :third_team, class: Team do
-  #   name { 'Factoryで作ったテストネーム3' }
-  #   owner { FactoryBot.create(:owner) }
-  #   user
-  # end
+  #リーダーの作成したチーム
+  factory :leader_team, class: Team do
+    name { 'チーム名_by_leader' }
+    # sequence(:name) { |n| "最初のチーム名_by_leader#{n}" }
+    # owner_id { '1' } #アドミンのオーナーID
+    owner_id {
+      (
+        User.find_by(email: FactoryBot.build(:leader_user).email) || FactoryBot.create(:leader_user)
+      ).id
+    }
+    # # user { FactoryBot.create :admin_user }
+    # sequence(:user) { |n| "User.find_by(admin: true)#{n}.id" }
+    # association :user, factory: :admin_user
+  end
 end
-
-#チームはアドミンとリーダーしか作成出来ない

@@ -12,7 +12,7 @@
       <% end %>
       </ul>
     </div>
-<% end %>
+  <% end %>
     <%= form.hidden_field :title %>
     <%= form.hidden_field :content %>
     <%= form.hidden_field :date, class: 'form-control' %>
@@ -25,7 +25,7 @@
     <p>作業場所:<%= @report.place %></p>
     <p>所要時間:<%= @report.time %></p><br>
     <p>画像:<%= image_tag(@report.image.url) if @report.image? && @report.image.url %></p>
-  <%= form.submit "登録する" %>
+  <%= form.submit "登録する", id: "reports--confirm__submit" %>
   <%= form.submit "戻る", name: 'back' %>
 <% end %>
     </div>
