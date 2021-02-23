@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_team, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_team, only: [:new, :create, :edit, :update, :destroy, :confirm]
   before_action :set_report, only: [:edit, :update, :destroy]
   # before_action :ensure_correct_user, only: [:edit, :update, :destroy, :update]
   PER = 10
@@ -15,7 +15,9 @@ class ReportsController < ApplicationController
   end
 
   def new
+    @team = Team.find(params[:team_id])
     @report = Report.new
+    @report.team_id = @team.id
   end
 
   def create
@@ -59,7 +61,7 @@ class ReportsController < ApplicationController
   def confirm
   # binding.irb
     @report = current_user.reports.build(report_params)
-    # render :new if @report.invalid?
+    render :new if @report.invalid?
   end
 
   private

@@ -18,9 +18,9 @@ Rails.application.routes.draw do
 
   resources :reports, only: [] do
     resources :report_comments, only: [:create, :destroy, :edit, :update]
-      collection do
-      post :confirm
-    end
+    #   collection do
+    #   post :confirm
+    # end
   end
 
   resources :teams do
