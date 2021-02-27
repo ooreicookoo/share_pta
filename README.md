@@ -70,3 +70,17 @@ devise
 chartkick
 
 Wicked PDF
+
+-----------
+
+管理者
+admin@gmail.com
+password
+
+リーダー
+leader@gmail.com
+password
+
+一般ユーザー
+enomotoreiko5@gmail.com
+password
